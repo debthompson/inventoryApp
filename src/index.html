@@ -1,26 +1,50 @@
+<!-- 
+  PROG 2005 - Programming Mobile Systems
+  Assessment 3
+  Group: Debralee Thompson
+  File: src/index.html
+  Purpose: Main HTML entry point; loads the Angular/Ionic app and inserts the root component
+-->
+
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8" />
+  
   <title>Ionic App</title>
 
+  <!-- Base URL for all paths in the app -->
   <base href="/" />
 
+  <!-- Allow light and dark mode based on device theme -->
   <meta name="color-scheme" content="light dark" />
+
+  <!-- Required for proper mobile scaling and display -->
   <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <!-- Don't automatically format phone numbers -->
   <meta name="format-detection" content="telephone=no" />
+
+  <!-- Prevent highlight flashes on mobile tap -->
   <meta name="msapplication-tap-highlight" content="no" />
 
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/icon/favicon.png" />
 
-  <!-- add to homescreen for ios -->
+  <!-- Allow “add to home screen” on iOS -->
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
 </head>
 
 <body>
+
+  <!-- Root Angular component; loads app.component.html -->
   <app-root></app-root>
+
 </body>
 
 </html>
