@@ -1,18 +1,43 @@
+<!-- 
+  PROG 2005 - Programming Mobile Systems
+  Assessment 3
+  Group: Debralee Thompson
+  File: src/app/tabs/tabs.page.html
+  Purpose: Displays the tab layout and navigation bar for the app
+-->
+
 <ion-tabs>
+
+  <!-- Where child pages load when each tab is selected -->
+  <ion-router-outlet></ion-router-outlet>
+
+  <!-- Bottom navigation bar for switching between pages -->
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
-      <ion-icon aria-hidden="true" name="triangle"></ion-icon>
-      <ion-label>Tab 1</ion-label>
+
+    <!-- Tab button for viewing the inventory list -->
+    <ion-tab-button tab="inventory" [routerLink]="['/tabs/inventory']">
+      <ion-icon name="list-outline"></ion-icon>
+      <ion-label>Inventory</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
-      <ion-label>Tab 2</ion-label>
+    <!-- Tab button for adding a new inventory item -->
+    <ion-tab-button tab="add" [routerLink]="['/tabs/add']">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-label>Add</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab3" href="/tabs/tab3">
-      <ion-icon aria-hidden="true" name="square"></ion-icon>
-      <ion-label>Tab 3</ion-label>
+    <!-- Tab button for managing (editing/deleting) items -->
+    <ion-tab-button tab="manage" [routerLink]="['/tabs/manage']">
+      <ion-icon name="create-outline"></ion-icon>
+      <ion-label>Manage</ion-label>
     </ion-tab-button>
+
+    <!-- Tab button for viewing the privacy policy -->
+    <ion-tab-button tab="privacy" [routerLink]="['/tabs/privacy']">
+      <ion-icon name="shield-checkmark-outline"></ion-icon>
+      <ion-label>Privacy</ion-label>
+    </ion-tab-button>
+    
   </ion-tab-bar>
+
 </ion-tabs>
