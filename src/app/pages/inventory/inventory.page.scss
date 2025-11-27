@@ -1,0 +1,48 @@
+.inv-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inv-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.inv-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.inv-subline {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.inv-details {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.inv-footer-row {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 0.8rem;
+}
+
+.inv-note {
+  opacity: 0.8;
+}
+
+ion-content {
+  --overflow: auto;
+  --padding-top: 8px;
+  --padding-bottom: 80px; // gives breathing room above the tab bar
+}

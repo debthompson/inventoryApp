@@ -1,0 +1,114 @@
+<!-- 
+  PROG 2005 - Programming Mobile Systems
+  Assessment 3
+  Group: Debralee Thompson
+  File: src/app/pages/inventory/inventory.page.html
+  Purpose: Displays the list of inventory items and allows searching and help pop-ups
+-->
+
+<!-- Top header bar with page title and Help button -->
+<ion-header [translucent]="true">
+  
+  <ion-toolbar>
+
+    <ion-title>Current Inventory</ion-title>
+
+    <!-- Help button (opens help popup) -->
+    <ion-buttons slot="end">
+      <ion-button (click)="openHelp()">
+        <ion-icon name="help-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+
+</ion-header>
+
+<!-- Help pop-up that explains how the page works -->
+<ion-alert
+  [isOpen]="showHelp"
+  header="Inventory Help"
+  message="This page shows all items from the Art Gallery inventory. Use the search bar to filter by name, category, or supplier. Use the Add and Manage tabs below to create and update items."
+  buttons="OK"
+  (didDismiss)="closeHelp()"
+></ion-alert>
+
+<ion-content [fullscreen]="true">
+  
+  <!-- Temporary test button (for console debugging) -->
+  <ion-button expand="block" (click)="onTestClick()">
+    Click me (test)
+  </ion-button>
+
+  <!-- Search bar used to filter inventory items -->
+  <ion-searchbar
+    placeholder="Search by name, category, or supplier"
+    (ionInput)="onSearchTermChange($event)"
+  ></ion-searchbar>
+
+  <!-- List of filtered inventory items -->
+  <ion-list>
+
+    <!-- Loop over each filtered inventory item -->
+    <ion-item *ngFor="let item of filteredItems" lines="full">
+      
+      <ion-label class="inv-label">
+
+        <!-- Item name and stock status badge -->
+        <div class="inv-header-row">
+          <h2 class="inv-name">
+            {{ item.item_name || ('Item #' + item.item_id) }}
+          </h2>
+
+          <!-- Stock status colour badge -->
+          <ion-badge
+            class="inv-status-badge"
+            [color]="
+              item.stock_status === 'In Stock'
+                ? 'success'
+                : item.stock_status === 'Low Stock'
+                  ? 'warning'
+                  : 'medium'
+            "
+          >
+            {{ item.stock_status }}
+          </ion-badge>
+        </div>
+
+        <!-- Category and supplier -->
+        <p class="inv-subline">
+          Category: {{ item.category }} • Supplier: {{ item.supplier_name }}
+        </p>
+
+        <!-- Quantity, price, and item ID -->
+        <p class="inv-details">
+          Qty: {{ item.quantity }} &nbsp; | &nbsp;
+          Price: ${{ item.price }} &nbsp; | &nbsp;
+          ID: {{ item.item_id }}
+        </p>
+
+        <!-- Featured badge and optional note -->
+        <div class="inv-footer-row">
+          
+           <!-- Display “Featured” chip only if item is featured -->
+          <ion-chip
+            *ngIf="item.featured_item && item.featured_item !== 0"
+            color="tertiary"
+            outline="true"
+          >
+            Featured
+          </ion-chip>
+
+          <!-- Optional special note -->
+          <span class="inv-note" *ngIf="item.special_note">
+            Note: {{ item.special_note }}
+          </span>
+        </div>
+
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
