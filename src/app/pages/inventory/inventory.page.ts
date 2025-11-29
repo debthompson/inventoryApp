@@ -25,6 +25,8 @@ import {
   IonButton,
   IonIcon,
   IonAlert,
+  IonSegment,
+  IonSegmentButton,
 } from '@ionic/angular/standalone';
 
 import { InventoryService } from '../../services/inventory.service';
@@ -57,6 +59,8 @@ import { InventoryItem } from '../../models/inventory-item';
     IonButton,
     IonIcon,
     IonAlert,
+    IonSegment,
+    IonSegmentButton,
     CommonModule,
     FormsModule,
   ],
@@ -72,6 +76,9 @@ export class InventoryPage implements OnInit {
 
   // Text entered into the search bar
   searchTerm = '';
+
+  // COMMENT
+  searchMode: string = 'all';
 
   // Controls visibility of the Help pop-up
   showHelp = false;
@@ -97,13 +104,13 @@ export class InventoryPage implements OnInit {
   }
 
   // Triggered when search input changes
-  onSearchTermChange(ev: any) {
-    this.searchTerm = ev.detail?.value || '';
+  onSearchTermChange(event: any) {
+    this.searchTerm = (event.target.value || '').toLowerCase();
     this.applyFilter();
   }
 
-  // Filters items based on search input
-  private applyFilter() {
+  // Filters items based on search input and search mode
+  applyFilter() {
     const term = this.searchTerm.toLowerCase().trim();
 
     // If search bar is empty, show all items
@@ -112,17 +119,28 @@ export class InventoryPage implements OnInit {
       return;
     }
 
-    // Filter items by name, category, or supplier
     this.filteredItems = this.items.filter((item) => {
       const name = item.item_name?.toLowerCase() || '';
       const cat = (item.category as string)?.toLowerCase?.() || '';
       const supplier = item.supplier_name?.toLowerCase() || '';
 
-      return (
-        name.includes(term) ||
-        cat.includes(term) ||
-        supplier.includes(term)
-      );
+      switch (this.searchMode) {
+        case 'name':
+          return name.includes(term);
+
+        case 'category':
+          return cat.includes(term);
+
+        case 'supplier':
+          return supplier.includes(term);
+
+        default: // 'all'
+          return (
+            name.includes(term) ||
+            cat.includes(term) ||
+            supplier.includes(term)
+          );
+      }
     });
   }
 
@@ -136,8 +154,4 @@ export class InventoryPage implements OnInit {
     this.showHelp = false;
   }
 
-  // For debugging/testing
-  onTestClick() {
-    console.log('Test button clicked');
-  }
 }

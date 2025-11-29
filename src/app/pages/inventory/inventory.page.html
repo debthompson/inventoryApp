@@ -34,17 +34,36 @@
 ></ion-alert>
 
 <ion-content [fullscreen]="true">
-  
-  <!-- Temporary test button (for console debugging) -->
-  <ion-button expand="block" (click)="onTestClick()">
-    Click me (test)
-  </ion-button>
 
   <!-- Search bar used to filter inventory items -->
   <ion-searchbar
-    placeholder="Search by name, category, or supplier"
+    placeholder="Search items"
     (ionInput)="onSearchTermChange($event)"
   ></ion-searchbar>
+
+  <!-- Search mode selector -->
+  <ion-segment
+    [(ngModel)]="searchMode"
+    value="all"
+    class="search-filter-segment"
+    (ionChange)="applyFilter()"
+  >
+    <ion-segment-button value="all">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="name">
+      <ion-label>Name</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="category">
+      <ion-label>Category</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="supplier">
+      <ion-label>Supplier</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
   <!-- List of filtered inventory items -->
   <ion-list>
@@ -56,11 +75,25 @@
 
         <!-- Item name and stock status badge -->
         <div class="inv-header-row">
-          <h2 class="inv-name">
-            {{ item.item_name || ('Item #' + item.item_id) }}
-          </h2>
 
-          <!-- Stock status colour badge -->
+          <!-- LEFT SIDE: name + featured chip -->
+          <div class="inv-name-row">
+            <h2 class="inv-name">
+              {{ item.item_name || ('Item #' + item.item_id) }}
+            </h2>
+
+            <!-- Featured Chip -->
+            <ion-chip
+              *ngIf="item.featured_item && item.featured_item !== 0"
+              color="tertiary"
+              outline="true"
+              class="inv-featured-chip"
+            >
+              Featured
+            </ion-chip>
+          </div>
+
+          <!-- RIGHT SIDE: stock badge -->
           <ion-badge
             class="inv-status-badge"
             [color]="
@@ -73,6 +106,7 @@
           >
             {{ item.stock_status }}
           </ion-badge>
+
         </div>
 
         <!-- Category and supplier -->
@@ -87,22 +121,14 @@
           ID: {{ item.item_id }}
         </p>
 
-        <!-- Featured badge and optional note -->
+        <!-- Optional note -->
         <div class="inv-footer-row">
-          
-           <!-- Display “Featured” chip only if item is featured -->
-          <ion-chip
-            *ngIf="item.featured_item && item.featured_item !== 0"
-            color="tertiary"
-            outline="true"
-          >
-            Featured
-          </ion-chip>
 
           <!-- Optional special note -->
           <span class="inv-note" *ngIf="item.special_note">
             Note: {{ item.special_note }}
           </span>
+          
         </div>
 
       </ion-label>
