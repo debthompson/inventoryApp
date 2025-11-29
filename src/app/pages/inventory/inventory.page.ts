@@ -24,6 +24,7 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
+  IonNote,
   IonAlert,
 } from '@ionic/angular/standalone';
 
@@ -57,6 +58,7 @@ import { AlertController } from '@ionic/angular';
     IonButtons,
     IonButton,
     IonIcon,
+	IonNote,
     IonAlert,
     CommonModule,
     FormsModule,
