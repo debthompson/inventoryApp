@@ -24,13 +24,11 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
-  IonNote,
   IonAlert,
 } from '@ionic/angular/standalone';
 
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryItem } from '../../models/inventory-item';
-import { AlertController } from '@ionic/angular';
 
 @Component({
   // Component tag used in HTML
@@ -58,7 +56,6 @@ import { AlertController } from '@ionic/angular';
     IonButtons,
     IonButton,
     IonIcon,
-	IonNote,
     IonAlert,
     CommonModule,
     FormsModule,
