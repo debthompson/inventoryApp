@@ -6,6 +6,7 @@
  * Purpose: Loads all inventory items, applies search filtering, and displays item data
  */
 
+// Imports
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -26,9 +27,9 @@ import {
   IonAlert,
 } from '@ionic/angular/standalone';
 
-// Imports
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryItem } from '../../models/inventory-item';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   // Component tag used in HTML
