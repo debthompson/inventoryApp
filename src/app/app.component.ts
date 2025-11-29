@@ -14,12 +14,19 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
   // Main application selector (used in index.html)
   selector: 'app-root',
-
+	standalone: true,
   // Root HTML template for the app
   templateUrl: 'app.component.html',
 
   // Ionic components available in this root component
   imports: [IonApp, IonRouterOutlet],
+  
+  template: `
+    <ion-app>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-app>
+  `,
+
 
 })
 

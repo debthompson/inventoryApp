@@ -23,6 +23,7 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
+  IonNote,
   IonAlert,
 } from '@ionic/angular/standalone';
 
@@ -56,6 +57,7 @@ import { InventoryItem } from '../../models/inventory-item';
     IonButtons,
     IonButton,
     IonIcon,
+	IonNote,
     IonAlert,
     CommonModule,
     FormsModule,
