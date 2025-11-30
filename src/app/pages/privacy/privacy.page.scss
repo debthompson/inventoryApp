@@ -7,12 +7,50 @@
   Purpose: Displays the privacy and security information of the app
 --> */
 
+//These are the structural and visual parameters that created the Privacy Page UI
 
 
-
-privacy_content {
-  padding: 16px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 8rem;
-  padding-left: 16px;
+ion-card {
+  --background: #cff7cf;
+  --color: #000000;
+  --border: #000000;
+  --border-radius: 1em;
+  --border-width: 2px;
+  --padding: 10px;
 }
+
+ion-card-title {
+  --color: #000000;
+  --font-style: bold, underline;
+}
+
+ion-card-header {
+  --color: #000000;
+  --font-style: bold, underline;
+}
+
+ion-card-subtitle {
+  --color: #830606;
+  text-decoration-line: underline;
+}
+
+h3 {
+  --color: #000000;
+  text-decoration-line: underline;
+}
+
+ion-label {
+  --color: #000000;
+  --border: 16px;
+  --border-color: #000000;
+}
+
+ion-item {
+  --background: #cff7cf;
+  --color: #000000;
+  --border: #000000;
+  --border-radius: 1em;
+  --border-width: 2px;
+  --padding: 10px;
+}
+
