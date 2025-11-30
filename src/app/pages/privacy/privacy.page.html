@@ -5,34 +5,34 @@
   File: src/app/pages/privacy/privacy.page.html
   Purpose: Displays the privacy and security information of the app
 -->
-<ion-content [fullscreen]="true">
-    <ion-header [translucent]="true">
+  <!-- This is the header -->
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>App Privacy & Security</ion-title>
+    </ion-toolbar>
+  <ion-header>
+
+  
+  <ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
       <ion-toolbar>
-        <ion-title>App Privacy & Security</ion-title>
+        <ion-title size="large">Privacy & Security</ion-title>
       </ion-toolbar>
     </ion-header>
-
-  <ion-toolbar>
-    <ion-header collapse="condense">
-       <ion-title size="large">Privacy & Security</ion-title>
-    </ion-header>
-  </ion-toolbar>
-
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Privacy Policy</ion-card-title>
-    </ion-card-header>
+   
+   <!-- //this is the outer box -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Privacy Policy</ion-card-title>
+      </ion-card-header>
 
     <ion-card-content>
-    Your privacy is important to us. This privacy statement explains the personal data we collect, how we use it, and your rights regarding your information.
-    <br>
-    <br>
+        Your privacy is important to us. This privacy statement explains the personal data we collect, how we use it, and your rights regarding your information.
+   
     <ion-item>
       <ion-card-subtitle>Data Collection</ion-card-subtitle>
-        <p>
-        This app only collects data required to support its's core functionality. For example the inventory manager requires the following personal information;
-        </p>
-        <br>
+       
+        <li>his app only collects data required to support its's core functionality. For example the inventory manager requires the following personal information;</li>
         <ion-list lines="none"> 
           <li>- Item Names</li>
           <li>- Item Categories</li>
@@ -43,7 +43,7 @@
         </ion-list>
     </ion-item>
         
-      <ion-item>
+    <ion-item>
         <ion-label>
           <h3>Device and System Data</h3>
             <p>
@@ -51,8 +51,7 @@
             </p>
         </ion-label>
       </ion-item>
-  
-    </ion-card-content>
+  </ion-card-content>
 </ion-card>
 </ion-content>
 
