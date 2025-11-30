@@ -1,45 +1,31 @@
 <!-- 
   PROG 2005 - Programming Mobile Systems
   Assessment 3
-  Group: Debralee Thompson
+  Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
   File: src/app/pages/inventory/inventory.page.html
-  Purpose: Displays the list of inventory items and allows searching and help pop-ups
+  Purpose: Displays the list of inventory items and allows searching and help widget.
 -->
 
 <!-- Top header bar with page title and Help button -->
 <ion-header [translucent]="true">
-
   <ion-toolbar>
 
     <ion-title>Current Inventory</ion-title>
 
-    <!-- Help button (opens help popup) -->
+    <!-- Help Widget (opens help popup) -->
     <ion-buttons slot="end">
-      <ion-button (click)="openHelp()">
+      <ion-button (click)="openHelp()" aria-label="Help">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
   </ion-toolbar>
-
 </ion-header>
-
-<!-- Help pop-up that explains how the page works -->
-<ion-alert
-  [isOpen]="showHelp"
-  header="Inventory Help"
-  message="This page shows all items from the Art Gallery inventory. Use the search bar to filter by name, category, or supplier. Use the Add and Manage tabs below to create and update items."
-  [buttons]="['OK']"
-  (didDismiss)="closeHelp()"
-></ion-alert>
 
 <ion-content [fullscreen]="true">
 
-  <!-- Search bar used to filter inventory items -->
-  <ion-searchbar
-    placeholder="Search items"
-    (ionInput)="onSearchTermChange($event)"
-  ></ion-searchbar>
+  <!-- Search bar that filter inventory items -->
+  <ion-searchbar placeholder="Search items" (ionInput)="onSearchTermChange($event)"></ion-searchbar>
 
   <!-- Search mode selector -->
   <ion-segment
@@ -134,7 +120,6 @@
       </ion-label>
 
     </ion-item>
-
   </ion-list>
 
 </ion-content>

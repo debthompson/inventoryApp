@@ -1,9 +1,10 @@
 /* 
  * PROG 2005 - Programming Mobile Systems
  * Assessment 3
- * Group: Debralee Thompson
+ * Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
  * File: src/app/pages/inventory/inventory.page.ts
- * Purpose: Loads all inventory items, applies search filtering, and displays item data
+ * Purpose: Displays the list of inventory items and allows searching and help
+ * widget.
  */
 
 // Imports
@@ -24,14 +25,36 @@ import {
   IonButtons,
   IonButton,
   IonIcon,
-  IonAlert,
   IonSegment,
   IonSegmentButton,
 } from '@ionic/angular/standalone';
-
+import { AlertController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryItem } from '../../models/inventory-item';
 
+// Helper Function: Search Term Match
+// Matches only if:
+// - the term matches the start of a word, or
+// - for longer terms (3+ letters), appears anywhere in the field
+function wordMatch(field: string, term: string): boolean {
+  field = field.toLowerCase();
+  term = term.toLowerCase();
+
+  const words = field.split(/\s+/);
+
+  // Short terms (1–2 letters): ONLY match start of word
+  if (term.length <= 2) {
+    return words.some(word => word.startsWith(term));
+  }
+
+  // Terms 3+ letters: allow anywhere
+  return (
+    words.some(word => word.startsWith(term)) ||
+    field.includes(term)
+  );
+}
+
+// Component Definition
 @Component({
   // Component tag used in HTML
   selector: 'app-inventory',
@@ -58,7 +81,6 @@ import { InventoryItem } from '../../models/inventory-item';
     IonButtons,
     IonButton,
     IonIcon,
-    IonAlert,
     IonSegment,
     IonSegmentButton,
     CommonModule,
@@ -66,6 +88,7 @@ import { InventoryItem } from '../../models/inventory-item';
   ],
 })
 
+// Page Logic
 export class InventoryPage implements OnInit {
 
   // Holds full list of items from the API
@@ -77,29 +100,33 @@ export class InventoryPage implements OnInit {
   // Text entered into the search bar
   searchTerm = '';
 
-  // COMMENT
+  // Current search mode (all, name, category, supplier)
   searchMode: string = 'all';
 
-  // Controls visibility of the Help pop-up
-  showHelp = false;
+  constructor(
+    private inventoryService: InventoryService,
+    private alertCtrl: AlertController
+  ) {}
 
-  constructor(private inventoryService: InventoryService) {}
-
-  // Runs once when the page loads
+  // NOT NEEDED: Runs when the tab becomes active (initial load + when returning to it)
   ngOnInit() {
+  }
 
-    // Call the API to get all inventory items
+  // Refresh items every time the Inventory tab becomes active
+  ionViewWillEnter() {
+    this.loadItems();
+  }
+
+  // Load all items from the API and update the filtered list
+  loadItems() {
     this.inventoryService.getAllItems().subscribe({
-      next: (data) => {
-        console.log('API response:', data);
-        
-        // Save items and apply search filtering
-        this.items = data;
-        this.applyFilter();
+      next: (items) => {
+        this.items = items;
+        this.applyFilter(); // keep existing search/filter applied
       },
       error: (err) => {
-        console.error('API ERROR:', err);
-      },
+        console.error('Error loading items:', err);
+      }
     });
   }
 
@@ -113,7 +140,6 @@ export class InventoryPage implements OnInit {
   applyFilter() {
     const term = this.searchTerm.toLowerCase().trim();
 
-    // If search bar is empty, show all items
     if (!term) {
       this.filteredItems = this.items;
       return;
@@ -126,32 +152,33 @@ export class InventoryPage implements OnInit {
 
       switch (this.searchMode) {
         case 'name':
-          return name.includes(term);
+          return wordMatch(name, term);
 
         case 'category':
-          return cat.includes(term);
+          return wordMatch(cat, term);
 
         case 'supplier':
-          return supplier.includes(term);
+          return wordMatch(supplier, term);
 
-        default: // 'all'
+        default: // all
           return (
-            name.includes(term) ||
-            cat.includes(term) ||
-            supplier.includes(term)
+            wordMatch(name, term) ||
+            wordMatch(cat, term) ||
+            wordMatch(supplier, term)
           );
       }
     });
   }
 
-  // Show help pop-up
-  openHelp() {
-    this.showHelp = true;
-  }
+  // Help Widget
+  async openHelp() {
+    const alert = await this.alertCtrl.create({
+      header: 'Inventory Help',
+      message:
+        'This page shows all items from the Art Gallery inventory. Use the search bar to filter by name, category, or supplier. Use the Add and Manage tabs below to create and update items.',
+      buttons: ['OK'],
+    });
 
-  // Close help pop-up
-  closeHelp() {
-    this.showHelp = false;
+    await alert.present();
   }
-
 }
