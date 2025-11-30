@@ -1,24 +1,21 @@
+/* 
+ * PROG 2005 - Programming Mobile Systems
+ * Assessment 3
+ * Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
+ * File: src/app/app.routes.ts
+ * Purpose: Defines the application's top-level routing configuration.
+ *          This file loads the Tabs routing module when the app starts,
+ *          ensuring all pages are displayed within the tab layout.
+ */
+
+
+// Imports
 import { Routes } from '@angular/router';
 
+// Load the tab layout and all tab-based pages when the app starts
 export const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.routes').then((m) => m.routes),
-  },
-  {
-    path: 'inventory',
-    loadComponent: () => import('./pages/inventory/inventory.page').then( m => m.InventoryPage)
-  },
-  {
-    path: 'add',
-    loadComponent: () => import('./pages/add/add.page').then( m => m.AddPage)
-  },
-  {
-    path: 'manage',
-    loadComponent: () => import('./pages/manage/manage.page').then( m => m.ManagePage)
-  },
-  {
-    path: 'privacy',
-    loadComponent: () => import('./pages/privacy/privacy.page').then( m => m.PrivacyPage)
-  },
+  }
 ];

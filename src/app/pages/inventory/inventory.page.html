@@ -1,50 +1,55 @@
 <!-- 
   PROG 2005 - Programming Mobile Systems
   Assessment 3
-  Group: Debralee Thompson
+  Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
   File: src/app/pages/inventory/inventory.page.html
-  Purpose: Displays the list of inventory items and allows searching and help pop-ups
+  Purpose: Displays the list of inventory items and allows searching and help widget.
 -->
 
 <!-- Top header bar with page title and Help button -->
 <ion-header [translucent]="true">
-  
   <ion-toolbar>
 
     <ion-title>Current Inventory</ion-title>
 
-    <!-- Help button (opens help popup) -->
+    <!-- Help Widget (opens help popup) -->
     <ion-buttons slot="end">
-      <ion-button (click)="openHelp()">
+      <ion-button (click)="openHelp()" aria-label="Help">
         <ion-icon name="help-circle-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
 
   </ion-toolbar>
-
 </ion-header>
 
-<!-- Help pop-up that explains how the page works -->
-<ion-alert
-  [isOpen]="showHelp"
-  header="Inventory Help"
-  message="This page shows all items from the Art Gallery inventory. Use the search bar to filter by name, category, or supplier. Use the Add and Manage tabs below to create and update items."
-  buttons="OK"
-  (didDismiss)="closeHelp()"
-></ion-alert>
-
 <ion-content [fullscreen]="true">
-  
-  <!-- Temporary test button (for console debugging) -->
-  <ion-button expand="block" (click)="onTestClick()">
-    Click me (test)
-  </ion-button>
 
-  <!-- Search bar used to filter inventory items -->
-  <ion-searchbar showClearButton="focus" value="Clear Search"
-    placeholder="Search by name, category, or supplier"
-    (ionInput)="onSearchTermChange($event)"
-  ></ion-searchbar>
+  <!-- Search bar that filter inventory items -->
+  <ion-searchbar placeholder="Search items" (ionInput)="onSearchTermChange($event)"></ion-searchbar>
+
+  <!-- Search mode selector -->
+  <ion-segment
+    [(ngModel)]="searchMode"
+    value="all"
+    class="search-filter-segment"
+    (ionChange)="applyFilter()"
+  >
+    <ion-segment-button value="all">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="name">
+      <ion-label>Name</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="category">
+      <ion-label>Category</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="supplier">
+      <ion-label>Supplier</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
   <!-- List of filtered inventory items -->
   <ion-list>
@@ -56,11 +61,25 @@
 
         <!-- Item name and stock status badge -->
         <div class="inv-header-row">
-          <h2 class="inv-name">
-            {{ item.item_name || ('Item #' + item.item_id) }}
-          </h2>
 
-          <!-- Stock status colour badge -->
+          <!-- LEFT SIDE: name + featured chip -->
+          <div class="inv-name-row">
+            <h2 class="inv-name">
+              {{ item.item_name || ('Item #' + item.item_id) }}
+            </h2>
+
+            <!-- Featured Chip -->
+            <ion-chip
+              *ngIf="item.featured_item && item.featured_item !== 0"
+              color="tertiary"
+              outline="true"
+              class="inv-featured-chip"
+            >
+              Featured
+            </ion-chip>
+          </div>
+
+          <!-- RIGHT SIDE: stock badge -->
           <ion-badge
             class="inv-status-badge"
             [color]="
@@ -73,6 +92,7 @@
           >
             {{ item.stock_status }}
           </ion-badge>
+
         </div>
 
         <!-- Category and supplier -->
@@ -87,28 +107,19 @@
           ID: {{ item.item_id }}
         </p>
 
-        <!-- Featured badge and optional note -->
+        <!-- Optional note -->
         <div class="inv-footer-row">
-          
-           <!-- Display “Featured” chip only if item is featured -->
-          <ion-chip
-            *ngIf="item.featured_item && item.featured_item !== 0"
-            color="tertiary"
-            outline="true"
-          >
-            Featured
-          </ion-chip>
 
           <!-- Optional special note -->
           <span class="inv-note" *ngIf="item.special_note">
             Note: {{ item.special_note }}
           </span>
+          
         </div>
 
       </ion-label>
 
     </ion-item>
-
   </ion-list>
 
 </ion-content>

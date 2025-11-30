@@ -3,15 +3,15 @@
  * Assessment 3
  * Group: Debralee Thompson, 
  * File: src/app/tabs/tabs.page.ts
- * Purpose: Defines the tab layout component and loads Ionic tabs, icons, and routing suppor
+ * Purpose: Defines the tab layout component and loads Ionic tabs, icons, and routing support.
  */
 
 // Imports
 import { Component, EnvironmentInjector, inject } from '@angular/core';
-import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel,IonRouterOutlet } from '@ionic/angular/standalone';
+import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import * as allIcons from 'ionicons/icons';
-import { RouterLink } from '@angular/router';
+//import { RouterLink } from '@angular/router';
 
 @Component({
   // The component selector used in HTML
@@ -27,7 +27,7 @@ import { RouterLink } from '@angular/router';
   standalone: true,
 
   // Ionic components and RouterLink available to this component
-  imports: [IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, RouterLink],
+  imports: [IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel /*RouterLink*/],
 })
 
 export class TabsPage {
