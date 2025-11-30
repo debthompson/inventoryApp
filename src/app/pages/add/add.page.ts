@@ -85,12 +85,11 @@ export class AddPage implements OnInit {
 	
 	//exposes enum
 	Category = Category;
-  StockStatus = StockStatus;
+    StockStatus = StockStatus;
   
-  // NOT NEEDED
-  // showHelp = false;
+
    
-	item_name: string = '';
+  item_name: string = '';
   category: Category = Category.Miscellaneous;
   quantity: number = 0;
   price: number = 0;
@@ -99,15 +98,7 @@ export class AddPage implements OnInit {
   featured_item: number = 0;
   special_note?: string | null = null;
 
-	// NOT NEEDED: help widget
-	// helpButton = [{
-	//   text: 'OK',	
-	//   handler: ()=>{
-	// 	  this.closeHelp()		
-	// 	  return true;	 
-	//   }
-	// }];
-  
+
   constructor(
     private inventoryService: InventoryService,
     private alertCtrl:AlertController
@@ -126,10 +117,7 @@ export class AddPage implements OnInit {
     await alert.present();
   }
 
-  // NOT NEEDED: Close help pop-up
-  // closeHelp() {
-  //   this.showHelp = false;
-  // }
+
   
   // Add a new item to the inventory, all fields match backend database
   addItem() {
@@ -174,7 +162,7 @@ export class AddPage implements OnInit {
         
         const alert = await this.alertCtrl.create({
           header: 'Error',
-          message: 'Failed to save item. Check the server / API URL.',
+          message: 'Failed to save item. Please ensure fields have been entered correctly or Check the server / API URL.',
           buttons: ['OK'],
         });
         await alert.present();

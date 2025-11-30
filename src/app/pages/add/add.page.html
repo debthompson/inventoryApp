@@ -18,8 +18,8 @@
 	 
 		<!-- Name -->
 		<ion-item>
-			<ion-label position="stacked">Name</ion-label>
-			<ion-input id="name" name="name" clearInput placeholder="enter.." [(ngModel)]="item_name"></ion-input>
+			<!--<ion-label >Name</ion-label>-->
+			<ion-input id="name" name="name" label="Product" labelPlacement="floating" clearInput placeholder= "Enter product name" [(ngModel)]="item_name"></ion-input>
 		</ion-item>
 		
 		<!-- Category -->
@@ -36,22 +36,21 @@
    
 		<!-- Qauntity -->
 		<ion-item>
-			<ion-label position="stacked">Quantity</ion-label>
-			<ion-input id="quantity" name="quantity"  [(ngModel)]="quantity"></ion-input>
+			<!--<ion-label position="stacked">Quantity</ion-label>-->
+			<ion-input id="quantity" name="quantity" label="Quantity" labelPlacement="floating" type="number" clearInput placeholder="Enter Quantity" [(ngModel)]="quantity"></ion-input>
 			<ion-note slot="error" color="danger">Text only</ion-note>
 		</ion-item>
    
 		<!-- Price -->
 		<ion-item>
-			<ion-label position="stacked">Price</ion-label>
-			<ion-input id="price" name="price"[(ngModel)]="price"></ion-input>
+			<ion-input id="price" name="price" type="number" label="Price" labelPlacement="floating" clearInput placeholder="Enter Price" [(ngModel)]="price"></ion-input>
 			<ion-note slot="error" color="danger">Text only</ion-note>
 		</ion-item>
     
 		<!-- Supplier -->
 		<ion-item>
-			<ion-label position="stacked">Supplier Name</ion-label>
-			<ion-input id="supplier" name = "supplier" clearInput placeholder="enter.." [(ngModel)]="supplier_name"></ion-input>
+			<!--<ion-label position="stacked">Supplier Name</ion-label>-->
+			<ion-input id="supplier" name = "supplier" label="Supplier Name" labelPlacement="floating" clearInput placeholder="Enter.." [(ngModel)]="supplier_name"></ion-input>
 			<ion-note slot="error" color="danger">Text only</ion-note>
 		</ion-item>
 		
@@ -72,8 +71,8 @@
 		
 		<!-- Note -->
 		<ion-item>
-			<ion-label position="stacked">Note</ion-label>
-			<ion-input clearInput placeholder="enter.." [(ngModel)]="special_note"></ion-input>
+			<!--<ion-label position="stacked">Note</ion-label>-->
+			<ion-input id="note" name="note" label="Note" labelPlacement="floating" clearInput placeholder="Enter.." [(ngModel)]="special_note"></ion-input>
 			<ion-note slot="error" color="danger">Text only</ion-note>
 		</ion-item>
    
