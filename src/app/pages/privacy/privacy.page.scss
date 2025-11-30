@@ -8,15 +8,25 @@
 --> */
 
 //These are the structural and visual parameters that created the Privacy Page UI
+.inv-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
 
+ion-app {
+  --background: #ffffff;
+
+}
 
 ion-card {
   --background: #ffffff;
   --color: #000000;
   --border: #000000;
   --border-radius: 1em;
-  --border-width: 2px;
-  --padding: 3px; 
+  --border-width: 2em;
+  --padding: 16em; 
 }
 
 ion-card-title {
@@ -28,14 +38,16 @@ ion-card-header {
   --color: #000000;
   text-decoration-line: underline;
   font-style: Bold;
+  font-weight: 2px;
 }
 
 ion-card-subtitle {
-  --color: #000000;
+  --font-color: #000000;
   text-decoration-line: underline;
 }
 ion-card-content {
   --color: #000000;
+  --padding: 3px;
   
 }
 
@@ -46,12 +58,12 @@ h3 {
 
 ion-label {
   --color: #000000;
-  --border: 16px;
+  --border: 3em;
   --border-color: #000000;
 }
 
 ion-item {
-  --background: #d0dad0;
+  --background: lab(98.17% -0.69 1.9);
   --color: #000000;
   --border: #000000;
   --border-radius: 1em;
