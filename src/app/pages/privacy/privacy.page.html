@@ -6,9 +6,9 @@
   Purpose: Displays the privacy and security information of the app
 -->
   <!-- This is the header -->
-  <ion-header [translucent]="true">
+  <ion-header translucent="true">
     <ion-toolbar>
-      <ion-title>App Privacy & Security</ion-title>
+      <ion-title size="large">App Privacy & Security</ion-title>
     </ion-toolbar>
   <ion-header>
 
@@ -20,19 +20,36 @@
       </ion-toolbar>
     </ion-header>
    
-   <!-- //this is the outer box -->
+   <!-- //this the Device and system storage data-->
     <ion-card>
       <ion-card-header>
         <ion-card-title>Privacy Policy</ion-card-title>
       </ion-card-header>
-
-    <ion-card-content>
-        Your privacy is important to us. This privacy statement explains the personal data we collect, how we use it, and your rights regarding your information.
+   <!-- //this the Device and system storage data--> 
+      <ion-item>
+        <ion-label>
+          <h3>Device and System Data</h3>
+            <ion-card-content>
+              Basic technical information such as device type, operating system version, anonymous usage statistics or error logs may be collected to improve app reliability and performance.
+            </ion-card-content>
+        </ion-label>
+    </ion-item>
    
     <ion-item>
-      <ion-card-subtitle>Data Collection</ion-card-subtitle>
-       
-        <li>his app only collects data required to support its's core functionality. For example the inventory manager requires the following personal information;</li>
+        <ion-label>
+          <h3>Device and System Data</h3>
+            <ion-card-content>
+              Basic technical information such as device type, operating system version, anonymous usage statistics or error logs may be collected to improve app reliability and performance.
+            </ion-card-content>
+        </ion-label>
+    </ion-item>
+        
+        <ion-item>
+        <ion-card-subtitle>Data Collection</ion-card-subtitle>
+          <li>his app only collects data required to support its's core functionality. For example the inventory manager requires the following personal information;</li>
+          
+          <br>
+
         <ion-list lines="none"> 
           <li>- Item Names</li>
           <li>- Item Categories</li>
@@ -42,16 +59,6 @@
           <li>- and similar inventory related details entered into forms</li>
         </ion-list>
     </ion-item>
-        
-    <ion-item>
-        <ion-label>
-          <h3>Device and System Data</h3>
-            <p>
-              Basic technical information such as device type, operating system version, anonymous usage statistics or error logs may be collected to improve app reliability and performance.
-            </p>
-        </ion-label>
-      </ion-item>
-  </ion-card-content>
-</ion-card>
+  </ion-card>
 </ion-content>
 

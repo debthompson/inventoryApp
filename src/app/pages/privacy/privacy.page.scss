@@ -16,7 +16,7 @@ ion-card {
   --border: #000000;
   --border-radius: 1em;
   --border-width: 2px;
-  --padding: 3px;
+  --padding: 3px; 
 }
 
 ion-card-title {
@@ -26,12 +26,17 @@ ion-card-title {
 
 ion-card-header {
   --color: #000000;
-  --font-style: bold, underline;
+  text-decoration-line: underline;
+  font-style: Bold;
 }
 
 ion-card-subtitle {
-  --color: #830606;
+  --color: #000000;
   text-decoration-line: underline;
+}
+ion-card-content {
+  --color: #000000;
+  
 }
 
 h3 {
@@ -46,7 +51,7 @@ ion-label {
 }
 
 ion-item {
-  --background: #cff7cf;
+  --background: #d0dad0;
   --color: #000000;
   --border: #000000;
   --border-radius: 1em;
