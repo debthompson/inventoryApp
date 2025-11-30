@@ -57,7 +57,6 @@ import { InventoryItem } from '../../models/inventory-item';
     IonButtons,
     IonButton,
     IonIcon,
-	IonNote,
     IonAlert,
     CommonModule,
     FormsModule,

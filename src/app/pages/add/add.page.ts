@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { IonContent, 
          IonHeader, 
-		 IonTitle, 
-		 IonToolbar,
-		 IonList,
-		 IonItem,
+		     IonTitle, 
+		     IonToolbar,
+		     IonList,
+		     IonItem,
          IonButtons,
          IonButton,
-		 IonSelect,
-		 IonSelectOption,
+		     IonSelect,
+		     IonSelectOption,
+         IonNote,
          IonIcon,
 		 IonInput,
-		 IonNote,
 		 IonToggle,
 		 IonLabel
 		 } from '@ionic/angular/standalone';
@@ -75,7 +75,6 @@ export type NewInventoryItem = Omit<InventoryItem, 'item_id'>;
             IonIcon,
 			IonSelect,
 			IonSelectOption,
-			IonNote,
 			IonInput,
 			IonToggle,
 			IonLabel
