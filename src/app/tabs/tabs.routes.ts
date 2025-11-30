@@ -16,32 +16,27 @@ export const routes: Routes = [
     path: 'tabs',
     component: TabsPage,
     
-    // Routes that appear inside the tabs area
-    // the components (pages) that load inside <ion-router-outlet></ion-router-outlet> in tabs.page.html
+    // Pages that appear inside the tabs area
     children: [
       {
         // Route for the Inventory page
         path: 'inventory',
-        loadComponent: () =>
-          import('../pages/inventory/inventory.page').then((m) => m.InventoryPage),
+        loadComponent: () => import('../pages/inventory/inventory.page').then((m) => m.InventoryPage),
       },
       {
         // Route for the Add Item page
         path: 'add',
-        loadComponent: () =>
-          import('../pages/add/add.page').then((m) => m.AddPage),
+        loadComponent: () => import('../pages/add/add.page').then((m) => m.AddPage),
       },
       {
         // Route for the Manage Items page
         path: 'manage',
-        loadComponent: () =>
-          import('../pages/manage/manage.page').then((m) => m.ManagePage),
+        loadComponent: () => import('../pages/manage/manage.page').then((m) => m.ManagePage),
       },
       {
         // Route for the Privacy page
         path: 'privacy',
-        loadComponent: () =>
-          import('../pages/privacy/privacy.page').then((m) => m.PrivacyPage),
+        loadComponent: () => import('../pages/privacy/privacy.page').then((m) => m.PrivacyPage),
       },      
       {
         // Default child route (if no tab selected)
