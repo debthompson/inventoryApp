@@ -27,15 +27,15 @@ export enum StockStatus {
 // Main structure for an inventory item
 // Fields match the backend database (snake_case)
 export interface InventoryItem {
-  item_id: number;                // unique ID (created automatically)
-  item_name: string;              // name of the item
-  category: Category;             // category using enum
-  quantity: number;               // how many in stock
-  price: number;                  // price of the item
-  supplier_name: string;          // supplier company/artist/etc.
-  stock_status: StockStatus;      // stock level status
-  featured_item: number;          // 0 or 1 to show featured status
-  special_note?: string | null;   // optional extra note
+  item_id: number;               
+  item_name: string;              
+  category: Category;             
+  quantity: number;               
+  price: number;                  
+  supplier_name: string;          
+  stock_status: StockStatus;      
+  featured_item: number;          
+  special_note?: string | null;   
 }
 
 // Type for creating new inventory items

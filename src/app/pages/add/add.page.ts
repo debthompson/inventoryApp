@@ -69,7 +69,7 @@ export type NewInventoryItem = Omit<InventoryItem, 'item_id'>;
     IonToolbar, 
     IonList,
     IonItem,
-    IonButtons,
+    IonButtons,   
     IonButton,
     IonIcon,
     IonSelect,
