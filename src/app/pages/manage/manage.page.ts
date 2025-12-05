@@ -7,31 +7,29 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, NgIf,} from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
-import { 
-  IonContent, 
-  IonHeader, 
-  IonTitle, 
-  IonToolbar, 
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
   IonItem,
   IonButton,
   IonLabel,
-  IonList,
   IonCard,
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
   IonCardSubtitle,
+  IonSearchbar,
   IonInput
 } from '@ionic/angular/standalone';
 
-import { AlertController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
-import { InventoryItem, Category, StockStatus,} from '../../models/inventory-item';
-
-/* Components */
+import { InventoryItem } from '../../models/inventory-item';
 
 @Component({
   selector: 'app-manage',
@@ -53,18 +51,18 @@ import { InventoryItem, Category, StockStatus,} from '../../models/inventory-ite
     IonCardHeader,
     IonCardContent,
     IonCardTitle,
-    IonCardSubtitle
+    IonCardSubtitle,
+    IonSearchbar,
+    IonInput
   ]
 })
 export class ManagePage implements OnInit {
-  
-items: InventoryItem[] = [];
- 
- 
-/* ----Search and Update items --------*/
+
+  items: InventoryItem[] = [];
+
+  // Search and selected item
   searchName: string = '';
-  selectedItem: InventoryItem | null = null;     // item to be edited item
-  editItem: any = null;          // make it editible
+  selectedItem: InventoryItem | null = null;
 
   constructor(
     private inventoryService: InventoryService,
@@ -75,6 +73,7 @@ items: InventoryItem[] = [];
     this.loadAllItems();
   }
 
+  // Load all items from backend (optional for list / refresh)
   loadAllItems() {
     this.inventoryService.getAllItems().subscribe({
       next: (items) => {
@@ -86,6 +85,7 @@ items: InventoryItem[] = [];
     });
   }
 
+  // Retrieve item based on searchName
   getItem() {
     const name = this.searchName.trim();
 
@@ -96,14 +96,59 @@ items: InventoryItem[] = [];
 
     this.inventoryService.getItemByName(name).subscribe({
       next: (item) => {
-        this.selectedItem = item; // direct binding
+        this.selectedItem = item;
       },
-      error: () => {
+      error: (err) => {
+        console.error('Error getting item:', err);
         this.selectedItem = null;
         this.showAlert('Not Found', 'No item found with that name.');
       }
     });
   }
+
+  // Delete current item
+  deleteItem() {
+    if (!this.selectedItem) {
+      return;
+    }
+
+    const name = this.selectedItem.item_name;
+
+    this.alertCtrl
+      .create({
+        header: 'Confirm Delete',
+        message: `Are you sure you want to delete "${name}"?`,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel'
+          },
+          {
+            text: 'Delete',
+            handler: () => {
+              this.inventoryService.deleteItem(name).subscribe({
+                next: () => {
+                  this.showAlert(
+                    'Deleted',
+                    `"${name}" has been removed from the inventory.`
+                  );
+                  this.selectedItem = null;
+                  this.searchName = '';
+                  this.loadAllItems();
+                },
+                error: (err) => {
+                  console.error('Error deleting item:', err);
+                  this.showAlert('Error', 'Item could not be deleted.');
+                }
+              });
+            }
+          }
+        ]
+      })
+      .then(alert => alert.present());
+  }
+
+  // Alert helper
   private async showAlert(header: string, message: string) {
     const alert = await this.alertCtrl.create({
       header,

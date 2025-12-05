@@ -1,9 +1,10 @@
 <!-- 
   PROG 2005 - Programming Mobile Systems
   Assessment 3
-  Group: Lydia pawlus
+  Group: Lydia Pawlus
   File: src/app/pages/manage/manage.page.html
-  Purpose: Displays Inventory management page to update and delet existing item records.-->
+  Purpose: Displays Inventory management page to update and delete existing item records.
+-->
 
 <!-- Manage inventory toolbar and header -->
 <ion-header [translucent]="true">
@@ -14,61 +15,109 @@
 
 <!-- main content -->
 <ion-content [fullscreen]="true">
-  
-<ion-header collapse="condense">
-  <ion-toolbar>
-    <ion-title size="large">Manage Inventory</ion-title>
-  </ion-toolbar>
-</ion-header>
-  
-<!-- Search box -->
- 
-<ion-card>
+
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Manage Inventory</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Search box -->
+  <ion-card>
     <ion-card-header>
       <ion-card-title>Find Item</ion-card-title>
       <ion-card-subtitle>Search by Item Name</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item>
-        <ion-label position="floating">Item Name</ion-label>
-        <ion-input [(ngModel)]="searchName"></ion-input>
-      </ion-item>
+ 
+      <ion-searchbar 
+         placeholder="Search items" 
+         [(ngModel)]="searchName">
+      </ion-searchbar>
 
-      <ion-button expand="block" color="primary" class="mt-16" (click)="getItem()">
+      <ion-button
+        expand="block"
+        color="primary"
+        class="mt-16"
+        (click)="getItem()">
         Retrieve Item
       </ion-button>
     </ion-card-content>
-</ion-card>
-
-<!-- Table layout for the selected item -->
-
-<ion-card *ngIf ="editItem">
-<ion-card-header>
-      <ion-card-title>Find Item</ion-card-title>
-      <ion-card-subtitle>Search by Item Name</ion-card-subtitle>
-</ion-card-header>
-</ion-card>
-
-<ion-card-content>
+  </ion-card>  
 
 
+<div class="manage-container" *ngIf="selectedItem">
+<!--  Table layout for the selected item -->
+<div class="left-panel" *ngIf="selectedItem">
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Current Item</ion-card-title>
+      <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
+    </ion-card-header>
 
+    <ion-card-content>
+      <p><strong>Name:</strong> {{ selectedItem.item_name }}</p>
+      <p><strong>Category:</strong> {{ selectedItem.category }}</p>
+      <p><strong>Quantity:</strong> {{ selectedItem.quantity }}</p>
+      <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
+      <p><strong>Status:</strong> {{ selectedItem.stock_status }}</p>
+      <p><strong>Featured:</strong> {{ selectedItem.featured_item }}</p>
+      <p><strong>Note:</strong> {{ selectedItem.special_note }}</p>
+    </ion-card-content>
+  </ion-card>
+</div>
 
+ <div class="right-panel">
+ <ion-card>
+    <ion-card-header>
+      <ion-card-title>Item Details</ion-card-title>
+      <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
+    </ion-card-header>
 
-</ion-card-content>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Name</ion-label>
+        <ion-input [(ngModel)]="selectedItem.item_name"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-input [(ngModel)]="selectedItem.category"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Quantity</ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.quantity"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Price</ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.price"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Stock Status</ion-label>
+        <ion-input type= any [(ngModel)]="selectedItem.stock_status"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Featured</ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.featured_item"></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label>Special Notes</ion-label>
+        <ion-input [(ngModel)]="selectedItem.special_note"></ion-input>
+      </ion-item>
 
+      <ion-button color="danger" (click)="deleteItem()">
+        Delete Item
+      </ion-button>
 
-
-
-
-</ion-content>
-
-
+    </ion-card-content>
+  </ion-card>
+</div>
+</div>
+ 

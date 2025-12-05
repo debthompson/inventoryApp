@@ -16,17 +16,17 @@
 }
 
 
-ion-content {
+.ion-content {
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-ion-app {
+.ion-app {
   --background: #ffffff;
   --background-image:var(--background-image;)
 }
 
-ion-card {
+.ion-card {
   --background: #ffffff;
   --color: #000000;
   --border: #000000;
@@ -35,40 +35,40 @@ ion-card {
   --padding: 20px; 
 }
 
-ion-card-title {
+.ion-card-title {
   --color: #000000;
   --font-style: bold, underline;
 }
 
-ion-card-header {
+.ion-card-header {
   --color: #000000;
   font-style: Bold;
   font-weight: 2px;
 }
 
-ion-card-subtitle {
+.ion-card-subtitle {
   --font-color: #000000;
   text-decoration-line: underline;
 }
-ion-card-content {
+.ion-card-content {
   --color: #000000;
   --padding: 15px;
   
 }
 
-h3 {
+.h3 {
   font-size: medium;
   --color: #000000;
   text-decoration-line: underline;
 }
 
-ion-label {
+.ion-label {
   --color: #000000;
   --border: 3em;
   --border-color: #000000;
 }
 
-ion-item {
+.ion-item {
   --background: lab(98.17% -0.69 1.9);
   --color: #000000;
   --border: #000000;
