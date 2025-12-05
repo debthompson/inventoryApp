@@ -88,6 +88,7 @@ export class ManagePage implements OnInit {
   // Retrieve item based on searchName
   getItem() {
     const name = this.searchName.trim();
+    console.log('Searching for item name;', name);
 
     if (!name) {
       this.showAlert('Search Error', 'Please enter an item name.');
@@ -96,6 +97,7 @@ export class ManagePage implements OnInit {
 
     this.inventoryService.getItemByName(name).subscribe({
       next: (item) => {
+        console.log('Item returned from API:', item);
         this.selectedItem = item;
       },
       error: (err) => {
