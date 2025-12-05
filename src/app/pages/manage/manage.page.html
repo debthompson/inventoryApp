@@ -49,9 +49,36 @@
 
 <div class="manage-container" *ngIf="selectedItem">
 
-
 <!--  Table layout for the selected item -->
-<div class="left-panel">
+    <!-- LEFT COLUMN — INVENTORY LIST -->
+  <div class="inventory-list">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Inventory List</ion-card-title>
+        <ion-card-subtitle>Total: {{ filteredItems.length }} items</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-list>
+          <ion-item 
+            button 
+            detail
+            *ngFor="let item of items"
+            (click)="selectItem(item)"
+          >
+            <ion-label>
+              <strong>{{ item.item_name }}</strong><br>
+              <small>Category: {{ item.category }}</small><br>
+              <small>Qty: {{ item.quantity }} • Status: {{ item.stock_status }}</small>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+<div class="middle-panel">
   <ion-card>
     <ion-card-header>
       <ion-card-title>Current Item</ion-card-title>
@@ -73,7 +100,7 @@
  <div class="right-panel">
  <ion-card>
     <ion-card-header>
-      <ion-card-title>Item Details</ion-card-title>
+      <ion-card-title>Update or Delete Current Item</ion-card-title>
       <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
     </ion-card-header>
 
@@ -113,12 +140,16 @@
         <ion-input [(ngModel)]="selectedItem.special_note"></ion-input>
       </ion-item>
 
+      <ion-button expand="block" color="primary" (click)="updateItem()">
+        Update Item
+      </ion-button>
+
       <ion-button color="danger" (click)="deleteItem()">
         Delete Item
       </ion-button>
 
-
     </ion-card-content>
   </ion-card>
-  </div>  
 </div>
+</div>
+</ion-content>  
