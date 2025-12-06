@@ -67,7 +67,7 @@
       <p><strong>Category:</strong> {{ selectedItem.category }}</p>
       <p><strong>Quantity:</strong> {{ selectedItem.quantity }}</p>
       <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
-      <p><strong>Status:</strong> {{ selectedItem.stock_status }}</p>
+      <p><strong>Stock Status:</strong> {{ selectedItem.stock_status }}</p>
       <p><strong>Featured:</strong> {{ selectedItem.featured_item }}</p>
       <p><strong>Special Note:</strong> {{ selectedItem.special_note }}</p>
     </ion-card-content>
@@ -81,7 +81,7 @@
       <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content>
+
       <ion-item>
         <ion-label><strong>Name: </strong></ion-label>
          <ion-input [(ngModel)]="selectedItem.item_name"></ion-input>
@@ -93,30 +93,33 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Quantity: </ion-label>
+        <ion-label><strong>Quantity: </strong></ion-label>
         <ion-input type="number" [(ngModel)]="selectedItem.quantity"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Price: </ion-label>
+        <ion-label><strong>Price: </strong></ion-label>
         <ion-input type="number" [(ngModel)]="selectedItem.price"></ion-input>
       </ion-item>
 
-      <ion-item>
-        <ion-label>Stock Status: </ion-label>
-        <ion-input type= any [(ngModel)]="selectedItem.stock_status"></ion-input>
+      <ion-item class="right-panel">
+          <ion-label position="left">Stock level</ion-label>
+			        <ion-select [(ngModel)]="selectedItem.stock_status">
+				      <ion-select-option value="In Stock">In stock</ion-select-option>
+				      <ion-select-option value="Low Stock">Low stock</ion-select-option>
+				      <ion-select-option value="Out of Stock">Out of stock</ion-select-option>
+			</ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Featured: </ion-label>
+        <ion-label><strong>Featured:</strong></ion-label>
         <ion-input type="number" [(ngModel)]="selectedItem.featured_item"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label>Special Notes: </ion-label>
-        <ion-input [(ngModel)]="selectedItem.special_note"></ion-input>
-      </ion-item>
-
+        <ion-label><strong> SpecialNotes: </strong></ion-label>
+        <ion-label><ion-input [(ngModel)]="selectedItem.special_note"></ion-input></ion-label>
+        </ion-item>
       <ion-button expand="block" color="primary" (click)="updateItem()">
         Update Item
       </ion-button>
@@ -124,8 +127,7 @@
       <ion-button color="danger" (click)="deleteItem()">
         Delete Item
       </ion-button>
-
-    </ion-card-content>
+      
   </ion-card>
 </div>
 </div>

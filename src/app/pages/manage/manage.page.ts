@@ -9,10 +9,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonInput, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonInput, IonList, IonSelectOption } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
-import { InventoryItem } from '../../models/inventory-item';
+import { Category, InventoryItem, StockStatus } from '../../models/inventory-item';
 
 
 
@@ -39,7 +39,8 @@ import { InventoryItem } from '../../models/inventory-item';
     IonCardTitle,
     IonCardSubtitle,
     IonInput,
-    IonList
+    IonList,
+    IonSelectOption
 ],
 })
 
@@ -48,25 +49,28 @@ export class ManagePage implements OnInit {
   items: InventoryItem[] = []; 
   selectedItem: InventoryItem | null = null;
   filteredItems: InventoryItem[] = [];
-
-  
-  
-  
+   
   originalName: string | null = null;
-  
-
+  item_name: string = '';
+  category: Category = Category.Miscellaneous;
+  quantity: number = 0;
+  price: number = 0;
+  supplier_name: string = '';
+  stock_status: StockStatus = StockStatus.InStock;
+  featured_item: number = 0;
+  special_note?: string | null = null;
 
   constructor(
     private inventoryService: InventoryService,
     private alertCtrl: AlertController,
   ) {}
 
-  ngOnInit() {
+ngOnInit() {
     this.loadItems();
   }
 
-  // Load all items from backend 
-  loadItems() {
+// Load all items from backend 
+loadItems() {
     this.inventoryService.getAllItems().subscribe({
       next: (items) => {
         this.items = items;
@@ -77,6 +81,7 @@ export class ManagePage implements OnInit {
       }
     });
   }
+
   
 selectItem(item: InventoryItem) {
     this.originalName = item.item_name;    // keep original DB key

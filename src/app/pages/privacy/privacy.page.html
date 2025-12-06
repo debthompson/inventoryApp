@@ -22,8 +22,8 @@
       </ion-header>
 
    
+
    <!-- //this is the privacy policy page-->
-    
       <ion-card-header>
         <ion-card-title>Privacy Policy</ion-card-title>
       </ion-card-header>
@@ -33,7 +33,7 @@
         <ion-label>
            <h3>Device and System Data types</h3>
                <p>
-                Basic technical information is stored such as device type, operating system version, anonymous usage statistics or error logs may be collected to improve app reliability and performance. 
+                The application may collect basic, non-personal technical information such as device model, operating system version, and anonymised usage statistics or error logs. This information is used solely to monitor performance, improve reliability, and ensure compatibility across different mobile devices and environments. 
                </p>
               </ion-label>
         </ion-item>
@@ -43,7 +43,7 @@
         <ion-label>
           <h3>Device Data Collection & Storage</h3>
             <p> 
-             The users device uploads data into our secure servers. This data settings remain active only while the app is open, and they are cleared when the app is closed unless the user enables persistent storage. No information is uploaded to external servers except location coordinates, which are used solely to retrieve postage data and are not saved after the request is completed.
+             When interacting with the application, user-entered data is processed temporarily within secure in-memory structures. These values remain available only while the application session is active. Once the app is closed or refreshed, the information is cleared unless the user deliberately enables persistent storage features. No personal or sensitive data is uploaded to external servers, and the app only communicates with remote endpoints when necessary (e.g., retrieving sample data). Location data and unrelated identifying information are never collected or transmitted.
             </p>
         </ion-label>
       </ion-item>
@@ -52,9 +52,9 @@
         <ion-label>
           <h3>Storage Method</h3>
               <p>
-              All data entered into the Ap is entered into a form by the user and this data is temporarily kept in the browser memory until closed or refreshed. Some data is stored if required and can be cached for longer periods of time. 
+              All information entered into the application is provided voluntarily by the user. This data is held temporarily in the browser’s memory or local state management system and is cleared automatically when the app is refreshed or closed. Some cached values may remain available for short periods if required for normal functionality, but no long-term or server-side storage occurs unless explicitly indicated.
               </p>
-        </ion-label>
+            </ion-label>
       </ion-item>
     
     <!-- //Security risks--> 
@@ -62,6 +62,7 @@
         <ion-label>
           <h3>Security Risks</h3>
             <p>
+            <li>Potential risks associated with the app include:</li>
             <li>- of incorrect data entry without validation.</li>
             <li>- Risk of someone using the device seeing or modifying inventory items.</li>
             <li>- If using API: risks in data transmission (e.g., interception) if not protected.</li>
@@ -72,12 +73,16 @@
       </ion-item>
 
 
-    <!-- //Security risks--> 
+    <!-- //Security Controls--> 
       <ion-item>
         <ion-label>
           <h3>Security Controls</h3>
           <p>
-            Input validation (required fields, numeric checks, unique ID logic).Restricted modification: items can only be edited or deleted by name.Use of HTTPS (API endpoint is HTTPS).Clear warnings and confirmation dialogs (delete confirmation).No sensitive data stored, reducing overall privacy impact.Separation between UI and data logic (clean architecture reduces errors).
+           <li>To reduce risks, several safeguards are implemented:</li> 
+           <li> - Input validation (required fields, numeric checks, unique ID logic).</li>
+           <li> - Restricted modification: items can only be edited or deleted by name.Use of HTTPS (API endpoint is HTTPS)</li> 
+           <li> - Clear warnings and confirmation dialogs (delete confirmation).</li>
+           <li>- No sensitive data stored, reducing overall privacy impact.Separation between UI and data logic (clean architecture reduces errors).</li> 
           </p> 
         </ion-label>
       </ion-item>
