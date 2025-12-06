@@ -45,6 +45,7 @@
           >
             <ion-label>
               <strong>{{ item.item_name }}</strong><br>
+              <p>Price:${{ item.price}}</p>
               <small>Category: {{ item.category }}</small><br>
               <small>Qty: {{ item.quantity }} • Status: {{ item.stock_status }} • ID: {{ item.item_id }}</small><br>
               <small>Special Notes: {{ item.special_note }}</small>
@@ -76,7 +77,7 @@
  <div class="right-panel" *ngIf="selectedItem">
  <ion-card>
     <ion-card-header>
-      <ion-card-title>Update or Delete Current Item</ion-card-title>
+      <ion-card-title>Update or Delete Selected Item</ion-card-title>
       <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
     </ion-card-header>
 

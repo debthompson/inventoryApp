@@ -119,7 +119,7 @@ updateItem(): void {
   const { item_id, ...payLoad } = this.selectedItem as InventoryItem;
 
   this.inventoryService
-    .updateItem(this.originalName, payLoad as any)   
+    .updateItem(this.originalName, payLoad as any)   // use originalName for URL
     .subscribe({
       next: (updated) => {
        //update local view
@@ -164,7 +164,7 @@ updateItem(): void {
                   );
                   this.selectedItem = null;
                   this.originalName = null;
-                  this.searchName = '';
+                  this['searchName'] = '';
                   this.loadItems();
                 },
                 error: (err) => {
