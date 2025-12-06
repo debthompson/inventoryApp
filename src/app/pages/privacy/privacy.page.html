@@ -28,56 +28,60 @@
         <ion-card-title>Privacy Policy</ion-card-title>
       </ion-card-header>
    
-      <!-- //this is the types User of data the app stores--> 
-    <ion-card-content>
-        <ion-item>
-          <ion-label>
-            <h3>Device and System Data types</h3>
-              
+    <!-- //this is the types User of data the app stores--> 
+      <ion-item>
+        <ion-label>
+           <h3>Device and System Data types</h3>
+               <p>
                 Basic technical information is stored such as device type, operating system version, anonymous usage statistics or error logs may be collected to improve app reliability and performance. 
-            </ion-label>
+               </p>
+              </ion-label>
         </ion-item>
          
     <!-- //this is way data is stored and collected--> 
-       <ion-item>
+      <ion-item>
         <ion-label>
           <h3>Device Data Collection & Storage</h3>
-              
-          The users device uploads data into our secure servers. This data settings remain active only while the app is open, and they are cleared when the app is closed unless the user enables persistent storage. No information is uploaded to external servers except location coordinates, which are used solely to retrieve postage data and are not saved after the request is completed.
-       </ion-label>
+            <p> 
+             The users device uploads data into our secure servers. This data settings remain active only while the app is open, and they are cleared when the app is closed unless the user enables persistent storage. No information is uploaded to external servers except location coordinates, which are used solely to retrieve postage data and are not saved after the request is completed.
+            </p>
+        </ion-label>
       </ion-item>
 
-    <ion-item>
+      <ion-item>
         <ion-label>
           <h3>Storage Method</h3>
-         
+              <p>
               All data entered into the Ap is entered into a form by the user and this data is temporarily kept in the browser memory until closed or refreshed. Some data is stored if required and can be cached for longer periods of time. 
-            </ion-label>
+              </p>
+        </ion-label>
       </ion-item>
-
-       <ion-item>
+    
+    <!-- //Security risks--> 
+       <ion-item >
         <ion-label>
           <h3>Security Risks</h3>
-            Risk of incorrect data entry without validation.
-            -Risk of someone using the device seeing or modifying   inventory items.
-
-            If using API: risks in data transmission (e.g., interception) if not protected.
-
-            Risks of weak identifiers (if item names are not unique).
-
-            Local session-based data can be lost, altered, or viewed by others using the same device. 
-            </ion-label>
+            <p>
+            <li>- of incorrect data entry without validation.</li>
+            <li>- Risk of someone using the device seeing or modifying inventory items.</li>
+            <li>- If using API: risks in data transmission (e.g., interception) if not protected.</li>
+            <li>- Risks of weak identifiers (if item names are not unique).</li>
+            <li>- Local session-based data can be lost, altered, or viewed by others using the same device.</li> 
+            </p>
+          </ion-label>
       </ion-item>
 
-       <ion-item>
+
+    <!-- //Security risks--> 
+      <ion-item>
         <ion-label>
           <h3>Security Controls</h3>
-         
-              Input validation (required fields, numeric checks, unique ID logic).Restricted modification: items can only be edited or deleted by name.Use of HTTPS (API endpoint is HTTPS).Clear warnings and confirmation dialogs (delete confirmation).No sensitive data stored, reducing overall privacy impact.Separation between UI and data logic (clean architecture reduces errors).
-            </ion-label>
+          <p>
+            Input validation (required fields, numeric checks, unique ID logic).Restricted modification: items can only be edited or deleted by name.Use of HTTPS (API endpoint is HTTPS).Clear warnings and confirmation dialogs (delete confirmation).No sensitive data stored, reducing overall privacy impact.Separation between UI and data logic (clean architecture reduces errors).
+          </p> 
+        </ion-label>
       </ion-item>
 
-    </ion-card-content>
         
 
   

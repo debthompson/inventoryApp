@@ -9,28 +9,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonSearchbar, IonInput, IonList } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonInput, IonList } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
 import { InventoryItem } from '../../models/inventory-item';
 
-function wordMatch(field: string, term: string): boolean {
-  field = field.toLowerCase();
-  term = term.toLowerCase();
-
-  const words = field.split(/\s+/);
-
-  // Short terms 
-  if (term.length <= 2) {
-    return words.some(word => word.startsWith(term));
-  }
-
-  // Terms 3+ letters: allow anywhere
-  return (
-    words.some(word => word.startsWith(term)) ||
-    field.includes(term)
-  );
-}
 
 
 // component
@@ -43,7 +26,6 @@ function wordMatch(field: string, term: string): boolean {
   imports: [
     CommonModule,
     FormsModule,
-    NgIf,
     IonContent,
     IonHeader,
     IonTitle,
@@ -56,31 +38,23 @@ function wordMatch(field: string, term: string): boolean {
     IonCardContent,
     IonCardTitle,
     IonCardSubtitle,
-    IonSearchbar,
     IonInput,
     IonList
 ],
 })
 
 export class ManagePage implements OnInit {
-
-  items: InventoryItem[] = [];
-
-  // Search and select item
-
+  searchName: string = '';
+  items: InventoryItem[] = []; 
   selectedItem: InventoryItem | null = null;
-   // Holds items after search filtering
+  filteredItems: InventoryItem[] = [];
+
   
-   filteredItems: InventoryItem[] = [];
+  
+  
+  originalName: string | null = null;
+  
 
-  // Text entered into the search bar
-  searchTerm = '';
-
-  searchName = '';
-
-  // Current search mode (all, name, category, supplier)
-  searchMode: string = 'all';
-updateItem: any;
 
   constructor(
     private inventoryService: InventoryService,
@@ -96,7 +70,7 @@ updateItem: any;
     this.inventoryService.getAllItems().subscribe({
       next: (items) => {
         this.items = items;
-        this.applyFilter(); 
+
       },
       error: (err) => {
         console.error('Error loading items:', err);
@@ -104,20 +78,15 @@ updateItem: any;
     });
   }
   
-  selectItem(item: InventoryItem) {
-  this.selectedItem = item;
+selectItem(item: InventoryItem) {
+    this.originalName = item.item_name;    // keep original DB key
+    this.selectedItem = {...item};
   }
-    onSearchTermChange(event: any) {
-    this.searchTerm = (event.target.value || '').toLowerCase();
-    this.applyFilter();
-  }
+  
 
-  applyFilter() {
-    throw new Error('Method not implemented.');
-  }
 
-  // Retrieve item based on searchName
-  getItem() {
+// Retrieve item based on name
+getItem() {
     const name = this.searchName.trim();
     console.log('Searching for item name;', name);
 
@@ -129,7 +98,8 @@ updateItem: any;
       this.inventoryService.getItemByName(name).subscribe({
       next: (item) => {
         console.log('API returned item:', item);
-        this.selectedItem = item;
+        this.originalName = item.item_name;
+        this.selectedItem = {...item };
       },
       error: (err) => {
         console.error('Error getting item:', err);
@@ -139,13 +109,40 @@ updateItem: any;
     });
   }
 
+  // Update item
+updateItem(): void {
+  if (!this.selectedItem || !this.originalName) {
+    return;
+  }
+
+  //remove item_id from the body
+  const { item_id, ...payLoad } = this.selectedItem as InventoryItem;
+
+  this.inventoryService
+    .updateItem(this.originalName, payLoad as any)   
+    .subscribe({
+      next: (updated) => {
+       //update local view
+        this.showAlert('Updated', `"${this.originalName}" has been updated.`);
+        this.loadItems();
+      },
+      error: (err) => {
+        console.error('Error updating item:', err);
+        this.showAlert('Error', 'Item could not be updated.');
+      }
+    });
+}
+
+
+
+  
   // Delete current item
   deleteItem() {
-    if (!this.selectedItem) {
-      return;
-    }
+  if (!this.selectedItem || !this.originalName) {
+    return;
+  }
 
-    const name = this.selectedItem.item_name;
+    const name = this.originalName;
 
     this.alertCtrl
       .create({
@@ -166,6 +163,7 @@ updateItem: any;
                     `"${name}" has been removed from the inventory.`
                   );
                   this.selectedItem = null;
+                  this.originalName = null;
                   this.searchName = '';
                   this.loadItems();
                 },
