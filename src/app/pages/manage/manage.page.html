@@ -27,7 +27,7 @@
 <div class="manage-container" *ngIf="items && items.length">
 
 <!--  Table layout for the selected item -->
-    <!-- LEFT COLUMN — INVENTORY LIST -->
+    <!-- Left Content — INVENTORY LIST -->
   <div class="inventory-list">
     <ion-card>
       <ion-card-header>
@@ -54,7 +54,7 @@
         </ion-list>
     </ion-card>
   </div>
-
+ <!-- Middle Content — SELECTED ITEM -->
 <div class="middle-panel"  *ngIf="selectedItem">
   <ion-card>
     <ion-card-header>
@@ -74,6 +74,7 @@
   </ion-card>
 </div>
 
+ <!-- Right Content — SELECTED ITEM & UPDATE & DELETE-->
  <div class="right-panel" *ngIf="selectedItem">
  <ion-card>
     <ion-card-header>
@@ -119,7 +120,9 @@
       <ion-item>
         <ion-label><strong> SpecialNotes: </strong></ion-label>
         <ion-label><ion-input [(ngModel)]="selectedItem.special_note"></ion-input></ion-label>
-        </ion-item>
+      </ion-item>
+
+ <!-- Delete and Update Buttons -->
       <ion-button expand="block" color="primary" (click)="updateItem()">
         Update Item
       </ion-button>
