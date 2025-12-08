@@ -7,42 +7,40 @@
 -->
 
 <ion-tabs>
+	<!-- 
+	* Where child pages load when each tab is selected
+	* This is supposed to be here, but no page interaction can occur when it is
+	* Everything is still working without it.
 
-  <!-- 
-   * Where child pages load when each tab is selected
-   * This is supposed to be here, but no page interaction can occur when it is
-   * Everything is still working without it.
-    
-   <ion-router-outlet></ion-router-outlet> 
-   -->
+	<ion-router-outlet></ion-router-outlet> 
+	-->
 
-  <!-- Bottom navigation bar for switching between pages -->
-  <ion-tab-bar slot="bottom">
+	<!-- Bottom navigation bar for switching between pages -->
+	<ion-tab-bar slot="bottom">
+		
+		<!-- Tab button for viewing the inventory list -->
+		<ion-tab-button tab="inventory">
+			<ion-icon name="list-outline"></ion-icon>
+			<ion-label>Inventory</ion-label>
+		</ion-tab-button>
 
-    <!-- Tab button for viewing the inventory list -->
-    <ion-tab-button tab="inventory">
-      <ion-icon name="list-outline"></ion-icon>
-      <ion-label>Inventory</ion-label>
-    </ion-tab-button>
+		<!-- Tab button for adding a new inventory item -->
+		<ion-tab-button tab="add">
+			<ion-icon name="add-circle-outline"></ion-icon>
+			<ion-label>Add</ion-label>
+		</ion-tab-button>
 
-    <!-- Tab button for adding a new inventory item -->
-    <ion-tab-button tab="add">
-      <ion-icon name="add-circle-outline"></ion-icon>
-      <ion-label>Add</ion-label>
-    </ion-tab-button>
+		<!-- Tab button for managing (editing/deleting) items -->
+		<ion-tab-button tab="manage">
+			<ion-icon name="create-outline"></ion-icon>
+			<ion-label>Manage</ion-label>
+		</ion-tab-button>
 
-    <!-- Tab button for managing (editing/deleting) items -->
-    <ion-tab-button tab="manage">
-      <ion-icon name="create-outline"></ion-icon>
-      <ion-label>Manage</ion-label>
-    </ion-tab-button>
+		<!-- Tab button for viewing the privacy policy -->
+		<ion-tab-button tab="privacy">
+			<ion-icon name="shield-checkmark-outline"></ion-icon>
+			<ion-label>Privacy</ion-label>
+		</ion-tab-button>
 
-    <!-- Tab button for viewing the privacy policy -->
-    <ion-tab-button tab="privacy">
-      <ion-icon name="shield-checkmark-outline"></ion-icon>
-      <ion-label>Privacy</ion-label>
-    </ion-tab-button>
-    
-  </ion-tab-bar>
-
+	</ion-tab-bar>
 </ion-tabs>
