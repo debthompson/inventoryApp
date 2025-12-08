@@ -1,125 +1,101 @@
 <!-- 
   PROG 2005 - Programming Mobile Systems
   Assessment 3
-  Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
+  Group: Debralee Thompson
   File: src/app/pages/inventory/inventory.page.html
-  Purpose: Displays the list of inventory items and allows searching and help widget.
+  Purpose: Displays the list of inventory items and allows searching and help widget
 -->
 
-<!-- Top header bar with page title and Help button -->
+<!-- Header page title and help button -->
 <ion-header [translucent]="true">
-  <ion-toolbar>
+	<ion-toolbar>
+		<ion-title size="large">Current Inventory</ion-title>
 
-    <ion-title>Current Inventory</ion-title>
-
-    <!-- Help Widget (opens help popup) -->
-    <ion-buttons slot="end">
-      <ion-button (click)="openHelp()" aria-label="Help">
-        <ion-icon name="help-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-
-  </ion-toolbar>
+		<!-- Help Widget (opens help popup) -->
+		<ion-buttons slot="end">
+			<ion-button (click)="openHelp()" aria-label="Help">
+				<ion-icon name="help-circle-outline"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+	</ion-toolbar>
 </ion-header>
 
+<!-- Main content -->
 <ion-content [fullscreen]="true">
+	<!-- Search bar that filter inventory items -->
+	<ion-searchbar placeholder="Search items" (ionInput)="onSearchTermChange($event)"></ion-searchbar>
 
-  <!-- Search bar that filter inventory items -->
-  <ion-searchbar placeholder="Search items" (ionInput)="onSearchTermChange($event)"></ion-searchbar>
+	<!-- Search mode selector -->
+	<ion-segment [(ngModel)]="searchMode" value="all" class="search-filter-segment" (ionChange)="applyFilter()">
+		<ion-segment-button value="all">
+			<ion-label>All</ion-label>
+		</ion-segment-button>
 
-  <!-- Search mode selector -->
-  <ion-segment
-    [(ngModel)]="searchMode"
-    value="all"
-    class="search-filter-segment"
-    (ionChange)="applyFilter()"
-  >
-    <ion-segment-button value="all">
-      <ion-label>All</ion-label>
-    </ion-segment-button>
+		<ion-segment-button value="name">
+			<ion-label>Name</ion-label>
+		</ion-segment-button>
 
-    <ion-segment-button value="name">
-      <ion-label>Name</ion-label>
-    </ion-segment-button>
+		<ion-segment-button value="category">
+			<ion-label>Category</ion-label>
+		</ion-segment-button>
 
-    <ion-segment-button value="category">
-      <ion-label>Category</ion-label>
-    </ion-segment-button>
+		<ion-segment-button value="supplier">
+			<ion-label>Supplier</ion-label>
+		</ion-segment-button>
+	</ion-segment>
 
-    <ion-segment-button value="supplier">
-      <ion-label>Supplier</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+	<!-- List of filtered inventory items -->
+	<ion-list>
+		<!-- Loop over each filtered inventory item -->
+		<ion-item *ngFor="let item of filteredItems" lines="full">
+			<ion-label class="inv-label">
 
-  <!-- List of filtered inventory items -->
-  <ion-list>
+				<!-- Item name and stock status badge -->
+				<div class="inv-header-row">
 
-    <!-- Loop over each filtered inventory item -->
-    <ion-item *ngFor="let item of filteredItems" lines="full">
-      
-      <ion-label class="inv-label">
+					<!-- LEFT SIDE: name + featured chip -->
+					<div class="inv-name-row">
+						<h2 class="inv-name">
+							{{ item.item_name || ('Item #' + item.item_id) }}
+						</h2>
 
-        <!-- Item name and stock status badge -->
-        <div class="inv-header-row">
+						<!-- Featured Chip -->
+						<ion-chip
+							*ngIf="item.featured_item && item.featured_item !== 0"
+							color="tertiary"
+							outline="true"
+							class="inv-featured-chip"
+						>
+							Featured
+						</ion-chip>
+					</div>
 
-          <!-- LEFT SIDE: name + featured chip -->
-          <div class="inv-name-row">
-            <h2 class="inv-name">
-              {{ item.item_name || ('Item #' + item.item_id) }}
-            </h2>
+					<!-- RIGHT SIDE: stock badge -->
+					<ion-badge class="inv-status-badge" [color]="item.stock_status === 'In Stock' ? 'success' : item.stock_status === 'Low Stock' ? 'warning' : 'medium'">
+						{{ item.stock_status }}
+					</ion-badge>
+				</div>
 
-            <!-- Featured Chip -->
-            <ion-chip
-              *ngIf="item.featured_item && item.featured_item !== 0"
-              color="tertiary"
-              outline="true"
-              class="inv-featured-chip"
-            >
-              Featured
-            </ion-chip>
-          </div>
+				<!-- Category and supplier -->
+				<p class="inv-subline">
+					Category: {{ item.category }} • Supplier: {{ item.supplier_name }}
+				</p>
 
-          <!-- RIGHT SIDE: stock badge -->
-          <ion-badge
-            class="inv-status-badge"
-            [color]="
-              item.stock_status === 'In Stock'
-                ? 'success'
-                : item.stock_status === 'Low Stock'
-                  ? 'warning'
-                  : 'medium'
-            "
-          >
-            {{ item.stock_status }}
-          </ion-badge>
+				<!-- Quantity, price, and item ID -->
+				<p class="inv-details">
+					Qty: {{ item.quantity }} &nbsp; | &nbsp;
+					Price: ${{ item.price }} &nbsp; | &nbsp;
+					ID: {{ item.item_id }}
+				</p>
 
-        </div>
-
-        <!-- Category and supplier -->
-        <p class="inv-subline">
-          Category: {{ item.category }} • Supplier: {{ item.supplier_name }}
-        </p>
-
-        <!-- Quantity, price, and item ID -->
-        <p class="inv-details">
-          Qty: {{ item.quantity }} &nbsp; | &nbsp;
-          Price: ${{ item.price }} &nbsp; | &nbsp;
-          ID: {{ item.item_id }}
-        </p>
-
-        <!-- Optional note -->
-        <div class="inv-footer-row">
-
-          <!-- Optional special note -->
-          <span class="inv-note" *ngIf="item.special_note">
-            Note: {{ item.special_note }}
-          </span>
-          
-        </div>
-
-      </ion-label>
-
-    </ion-item>
-  </ion-list>
-
+				<!-- Optional note -->
+				<div class="inv-footer-row">
+					<!-- Optional special note -->
+					<span class="inv-note" *ngIf="item.special_note">
+						Note: {{ item.special_note }}
+					</span>
+				</div>
+			</ion-label>
+		</ion-item>
+	</ion-list>
 </ion-content>
