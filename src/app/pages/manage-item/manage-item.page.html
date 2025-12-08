@@ -1,0 +1,86 @@
+<!-- 
+  PROG 2005 - Programming Mobile Systems
+  Assessment 3
+  Group: Lydia Pawlus, Debralee Thompson
+  File: src/app/pages/manage-item/manage-item.page.html
+  Purpose: Update a single inventory item
+-->
+
+<!-- Header page title -->
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title size="large">Update Item</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<!-- Main content -->
+<ion-content [fullscreen]="true">
+
+    <!-- Show form when item is loaded -->
+    <ng-container *ngIf="item; else loadingOrError">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>Update Item: {{ item.item_name }}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-item>
+                    <ion-label position="stacked">Name</ion-label>
+                    <ion-input [(ngModel)]="item.item_name"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Category</ion-label>
+                    <ion-input [(ngModel)]="item.category"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Quantity</ion-label>
+                    <ion-input type="number" [(ngModel)]="item.quantity"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Price</ion-label>
+                    <ion-input type="number" [(ngModel)]="item.price"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Stock Status</ion-label>
+                    <ion-select [(ngModel)]="item.stock_status">
+                    <ion-select-option [value]="StockStatus.InStock">In stock</ion-select-option>
+                    <ion-select-option [value]="StockStatus.LowStock">Low stock</ion-select-option>
+                    <ion-select-option [value]="StockStatus.OutOfStock">Out of stock</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Featured</ion-label>
+                    <ion-toggle
+                    [checked]="item.featured_item === 1"
+                    (ionChange)="item.featured_item = $event.detail.checked ? 1 : 0">
+                    </ion-toggle>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="stacked">Special Note</ion-label>
+                    <ion-input [(ngModel)]="item.special_note"></ion-input>
+                </ion-item>
+
+                <ion-button expand="block" (click)="saveUpdate()">
+                    Save Changes
+                </ion-button>
+
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
+
+    <!-- Loading / error fallback -->
+    <ng-template #loadingOrError>
+        <ion-card>
+            <ion-card-content>
+                <p *ngIf="loading">Loading item...</p>
+                <p *ngIf="!loading && loadError">{{ loadError }}</p>
+            </ion-card-content>
+        </ion-card>
+    </ng-template>
+</ion-content>

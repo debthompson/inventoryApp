@@ -3,7 +3,7 @@
  * Assessment 3
  * Group: Debralee Thompson
  * File: src/app/app.component.ts
- * Purpose: Root component of the app — sets up the top-level Ionic container and router outlet
+ * Purpose: Root component of the app, sets up the top-level Ionic container and router outlet
  */
 
 // Imports
@@ -11,17 +11,17 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
-  // Main application selector (used in index.html)
-  selector: 'app-root',
+	// Main application selector (used in index.html)
+	selector: 'app-root',
 
-  // 
+	// Marks this component as a standalone component (does not require an NgModule)
 	standalone: true,
 
-  // Root HTML template for the app
-  templateUrl: 'app.component.html',
+	// Root HTML template for the app
+	templateUrl: 'app.component.html',
 
-  // Ionic components available in this root component
-  imports: [IonApp, IonRouterOutlet],
+	// Ionic components available in this root component
+	imports: [IonApp, IonRouterOutlet],
 })
 
 export class AppComponent {}

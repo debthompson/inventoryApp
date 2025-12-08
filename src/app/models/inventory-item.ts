@@ -9,33 +9,33 @@
 
 // List of possible item categories
 export enum Category {
-  Electronics = 'Electronics',
-  Furniture = 'Furniture',
-  Clothing = 'Clothing',
-  Tools = 'Tools',
-  Miscellaneous = 'Miscellaneous',
+	Electronics = 'Electronics',
+	Furniture = 'Furniture',
+	Clothing = 'Clothing',
+	Tools = 'Tools',
+	Miscellaneous = 'Miscellaneous',
 }
 
 // Possible stock status values
 export enum StockStatus {
-  InStock = 'In Stock',
-  LowStock = 'Low Stock',
-  OutOfStock = 'Out of Stock',
+	InStock = 'In Stock',
+	LowStock = 'Low Stock',
+	OutOfStock = 'Out of Stock',
 }
 
 
 // Main structure for an inventory item
 // Fields match the backend database (snake_case)
 export interface InventoryItem {
-  item_id: number;               
-  item_name: string;              
-  category: Category;             
-  quantity: number;               
-  price: number;                  
-  supplier_name: string;          
-  stock_status: StockStatus;      
-  featured_item: number;          
-  special_note?: string | null;   
+	item_id: number;               
+	item_name: string;              
+	category: Category;             
+	quantity: number;               
+	price: number;                  
+	supplier_name: string;          
+	stock_status: StockStatus;      
+	featured_item: number;          
+	special_note?: string | null;   
 }
 
 // Type for creating new inventory items
