@@ -9,7 +9,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonInput, IonList, IonSelectOption, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonSelect, IonButton, IonLabel, IonCard, IonCardHeader, IonCardContent, IonCardTitle, IonCardSubtitle, IonInput, IonList, IonSelectOption, IonGrid, IonCol, IonRow } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { InventoryService } from '../../services/inventory.service';
 import { Category, InventoryItem, StockStatus } from '../../models/inventory-item';
@@ -31,6 +31,7 @@ import { Category, InventoryItem, StockStatus } from '../../models/inventory-ite
     IonTitle,
     IonToolbar,
     IonItem,
+    IonSelect,
     IonButton,
     IonLabel,
     IonCard,
