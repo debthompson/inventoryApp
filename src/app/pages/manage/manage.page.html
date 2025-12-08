@@ -28,53 +28,61 @@
 
 <!--  Table layout for the selected item -->
     <!-- LEFT COLUMN — INVENTORY LIST -->
-  <div class="inventory-list">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Inventory List</ion-card-title>
-        <ion-card-subtitle>Select Product Below</ion-card-subtitle>
-      </ion-card-header>
+  <ion-grid>
+      <ion-row>
+    
+       <ion-col size="12" size-lg="4" >
+        <div class="inventory-list">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Inventory List</ion-card-title>
+              <ion-card-subtitle>Select Product Below</ion-card-subtitle>
+            </ion-card-header>
 
 
-        <ion-list>
-          <ion-item 
-            button 
-            detail
-            *ngFor="let item of items"
-            (click)="selectItem(item)"
-          >
-            <ion-label>
-              <strong>{{ item.item_name }}</strong><br>
-              <p>Price:${{ item.price}}</p>
-              <small>Category: {{ item.category }}</small><br>
-              <small>Qty: {{ item.quantity }} • Status: {{ item.stock_status }} • ID: {{ item.item_id }}</small><br>
-              <small>Special Notes: {{ item.special_note }}</small>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-    </ion-card>
-  </div>
+            <ion-list>
+              <ion-item 
+                button 
+                detail
+                *ngFor="let item of items"
+                (click)="selectItem(item)">
+              
+                <ion-label>
+                  <strong>{{ item.item_name }}</strong><br>
+                  <p>Price:${{ item.price}}</p>
+                  <small>Category: {{ item.category }}</small><br>
+                  <small>Qty: {{ item.quantity }} • Status: {{ item.stock_status }} • ID: {{ item.item_id }}</small><br>
+                  <small>Special Notes: {{ item.special_note }}</small>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card>
+        </div>
+      </ion-col>
+      
+      <ion-col>
+         <div class="middle-panel"  *ngIf="selectedItem">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Selected Item</ion-card-title>
+                <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
+            </ion-card-header>
 
-<div class="middle-panel"  *ngIf="selectedItem">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Selected Item</ion-card-title>
-      <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
-    </ion-card-header>
+            <ion-card-content>
+              <p><strong>Name:</strong> {{ selectedItem.item_name }}</p>
+              <p><strong>Category:</strong> {{ selectedItem.category }}</p>
+              <p><strong>Quantity:</strong> {{ selectedItem.quantity }}</p>
+              <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
+              <p><strong>Stock Status:</strong> {{ selectedItem.stock_status }}</p>
+              <p><strong>Featured:</strong> {{ selectedItem.featured_item }}</p>
+              <p><strong>Special Note:</strong> {{ selectedItem.special_note }}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
 
-    <ion-card-content>
-      <p><strong>Name:</strong> {{ selectedItem.item_name }}</p>
-      <p><strong>Category:</strong> {{ selectedItem.category }}</p>
-      <p><strong>Quantity:</strong> {{ selectedItem.quantity }}</p>
-      <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
-      <p><strong>Stock Status:</strong> {{ selectedItem.stock_status }}</p>
-      <p><strong>Featured:</strong> {{ selectedItem.featured_item }}</p>
-      <p><strong>Special Note:</strong> {{ selectedItem.special_note }}</p>
-    </ion-card-content>
-  </ion-card>
-</div>
-
- <div class="right-panel" *ngIf="selectedItem">
+ <ion-col>
+    <div class="right-panel" *ngIf="selectedItem">
  <ion-card>
     <ion-card-header>
       <ion-card-title>Update or Delete Selected Item</ion-card-title>
@@ -120,6 +128,7 @@
         <ion-label><strong> SpecialNotes: </strong></ion-label>
         <ion-label><ion-input [(ngModel)]="selectedItem.special_note"></ion-input></ion-label>
         </ion-item>
+
       <ion-button expand="block" color="primary" (click)="updateItem()">
         Update Item
       </ion-button>
@@ -127,7 +136,13 @@
       <ion-button color="danger" (click)="deleteItem()">
         Delete Item
       </ion-button>
-      
-  </ion-card>
+     </ion-card>
+    </div> 
+ </ion-col>
+
+
+    </ion-row>
+ </ion-grid>
+  
 </div>
-</div>
+

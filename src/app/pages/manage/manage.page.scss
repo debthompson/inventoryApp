@@ -2,38 +2,42 @@
 
 .manage-container {
   display: flex;
-  flex-direction: row;
-  gap: 16px;
+  gap: 1rem;
+  align-items: stretch;
 }
 
-.inventory-list {
-  width: 35%;
-  flex-direction: row;
-
-}
-
-.left-panel {
-  width: 30%;
-
-}
-
+/* columns share the row */
+.inventory-list,
+.middle-panel,
 .right-panel {
-  width: 30%;
-  flex-direction:row ;
-  font-size: 15px;
+  flex: 1 1 0;
+  min-width: 100%;
 }
 
-
-.inventory-list, 
-.left-panel, 
-.right-panel {
-    width: 100%;
+/* 🔻 When screen gets narrow, stack them */
+@media (max-width: 900px) {
+  .manage-container {
+    flex-direction: column;
   }
+}
+.inventory-list {
+  width: 32%;
+  flex-direction: row;
+
+}
+
+.right-panel {
+  width: 10%;
+  flex-direction:row;
+  font-size: 32px;
+}
 
 .middle-panel {
-  flex-direction: column;
+  flex-direction: row;
   font-size: smaller;
   padding: 5px;
+  width: 36%;
+
 }
 .ion-content {
   background-size: cover;
