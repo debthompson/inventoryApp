@@ -3,71 +3,131 @@
   Assessment 3
   Group: Lydia Pawlus
   File: src/app/pages/manage/manage.page.html
-  Purpose: Displays Inventory management page to update and delete existing item records
+  Purpose: Displays Inventory management page to update and delete existing item records.
 -->
 
-<!-- Header page title and help button -->
+<!-- Manage inventory toolbar and header -->
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title size="large">Manage Inventory</ion-title>
-
-    <!-- Help Widget (opens help popup) -->
-    <ion-buttons slot="end">
-      <ion-button (click)="openHelp()" aria-label="Help">
-        <ion-icon name="help-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <!-- main content -->
 <ion-content [fullscreen]="true">
 
-  <!-- If there are items -->
-  <ng-container *ngIf="items && items.length; else noItems">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Manage Inventory</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+@if (selectedItem) {}
+<div class="manage-container" *ngIf="items && items.length">
+
+<!--  Table layout for the selected item -->
+    <!-- LEFT COLUMN — INVENTORY LIST -->
+  <div class="inventory-list">
     <ion-card>
       <ion-card-header>
         <ion-card-title>Inventory List</ion-card-title>
-        <ion-card-subtitle>Select an item to Update or delete:</ion-card-subtitle>
+        <ion-card-subtitle>Select Product Below</ion-card-subtitle>
       </ion-card-header>
 
-      <ion-card-content>
-        <ion-list>
-          <ion-item *ngFor="let item of items">
-            <ion-label>
-              <strong>{{ item.item_name || ('Item #' + item.item_id) }}</strong><br>
-              <p>Price: ${{ item.price }}</p>
-              <small>Category: {{ item.category }}</small><br>
-              <small>
-                Qty: {{ item.quantity }}
-                • Status: {{ item.stock_status }}
-                • ID: {{ item.item_id }}
-              </small><br>
-              <small *ngIf="item.special_note">
-                Special Notes: {{ item.special_note }}
-              </small>
-            </ion-label>
 
-            <!-- Action buttons on the right -->
-            <ion-button size="small" (click)="goToUpdate(item)" slot="end">
-              Update
-            </ion-button>
-            <ion-button size="small" color="danger" (click)="confirmDelete(item)" slot="end">
-              Delete
-            </ion-button>
+        <ion-list>
+          <ion-item 
+            button 
+            detail
+            *ngFor="let item of items"
+            (click)="selectItem(item)"
+          >
+            <ion-label>
+              <strong>{{ item.item_name }}</strong><br>
+              <p>Price:${{ item.price}}</p>
+              <small>Category: {{ item.category }}</small><br>
+              <small>Qty: {{ item.quantity }} • Status: {{ item.stock_status }} • ID: {{ item.item_id }}</small><br>
+              <small>Special Notes: {{ item.special_note }}</small>
+            </ion-label>
           </ion-item>
         </ion-list>
-      </ion-card-content>
     </ion-card>
-  </ng-container>
+  </div>
 
-  <!-- If there are no items -->
-  <ng-template #noItems>
-    <ion-card>
-      <ion-card-content>
-        No items found.
-      </ion-card-content>
-    </ion-card>
-  </ng-template>
+<div class="middle-panel"  *ngIf="selectedItem">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Selected Item</ion-card-title>
+      <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
+    </ion-card-header>
 
-</ion-content>
+    <ion-card-content>
+      <p><strong>Name:</strong> {{ selectedItem.item_name }}</p>
+      <p><strong>Category:</strong> {{ selectedItem.category }}</p>
+      <p><strong>Quantity:</strong> {{ selectedItem.quantity }}</p>
+      <p><strong>Price:</strong> ${{ selectedItem.price }}</p>
+      <p><strong>Stock Status:</strong> {{ selectedItem.stock_status }}</p>
+      <p><strong>Featured:</strong> {{ selectedItem.featured_item }}</p>
+      <p><strong>Special Note:</strong> {{ selectedItem.special_note }}</p>
+    </ion-card-content>
+  </ion-card>
+</div>
+
+ <div class="right-panel" *ngIf="selectedItem">
+ <ion-card>
+    <ion-card-header>
+      <ion-card-title>Update or Delete Selected Item</ion-card-title>
+      <ion-card-subtitle>ID: {{ selectedItem.item_id }}</ion-card-subtitle>
+    </ion-card-header>
+
+
+      <ion-item>
+        <ion-label><strong>Name: </strong></ion-label>
+         <ion-input [(ngModel)]="selectedItem.item_name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong>Category: </strong></ion-label>
+        <ion-input [(ngModel)]="selectedItem.category"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong>Quantity: </strong></ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.quantity"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong>Price: </strong></ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.price"></ion-input>
+      </ion-item>
+
+      <ion-item class="right-panel">
+          <ion-label position="left">Stock level</ion-label>
+			        <ion-select [(ngModel)]="selectedItem.stock_status">
+				      <ion-select-option value="In Stock">In stock</ion-select-option>
+				      <ion-select-option value="Low Stock">Low stock</ion-select-option>
+				      <ion-select-option value="Out of Stock">Out of stock</ion-select-option>
+			</ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong>Featured:</strong></ion-label>
+        <ion-input type="number" [(ngModel)]="selectedItem.featured_item"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label><strong> SpecialNotes: </strong></ion-label>
+        <ion-label><ion-input [(ngModel)]="selectedItem.special_note"></ion-input></ion-label>
+        </ion-item>
+      <ion-button expand="block" color="primary" (click)="updateItem()">
+        Update Item
+      </ion-button>
+
+      <ion-button color="danger" (click)="deleteItem()">
+        Delete Item
+      </ion-button>
+      
+  </ion-card>
+</div>
+</div>
