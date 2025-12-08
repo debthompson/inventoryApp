@@ -16,12 +16,13 @@ import { IonContent,
   IonInput,
   IonNote,
   IonToggle,
+  IonTextarea,
   IonLabel
 } from '@ionic/angular/standalone';
 
 import { InventoryService } from '../../services/inventory.service';
 
-// List of possible item categories
+// Array of available item categories
 export enum Category {
   Electronics = 'Electronics',
   Furniture = 'Furniture',
@@ -77,6 +78,7 @@ export type NewInventoryItem = Omit<InventoryItem, 'item_id'>;
     IonNote,
     IonInput,
     IonToggle,
+	IonTextarea,
     IonLabel
   ],
 })
@@ -90,11 +92,11 @@ export class AddPage implements OnInit {
 
    
   item_name: string = '';
-  category: Category = Category.Miscellaneous;
-  quantity: number = 0;
-  price: number = 0;
+  category: Category | null = null;
+  quantity: number | null = null;
+  price: number | null= null;
   supplier_name: string = '';
-  stock_status: StockStatus = StockStatus.InStock;
+  stock_status: StockStatus | null = null;
   featured_item: number = 0;
   special_note?: string | null = null;
 
@@ -123,13 +125,13 @@ export class AddPage implements OnInit {
   addItem() {
     const newItem: NewInventoryItem = {	
       item_name: this.item_name,
-      category: this.category,
-      quantity: this.quantity,
-      price: this.price,
+      category: this.category as Category,
+      quantity: this.quantity as number,
+      price: this.price as number,
       supplier_name: this.supplier_name,
-      stock_status: this.stock_status,
+      stock_status: this.stock_status as StockStatus,
       featured_item: this.featured_item,
-      special_note: this.special_note
+      special_note: this.special_note, 
     };
 	
     this.inventoryService.addItem(newItem).subscribe({
@@ -148,8 +150,8 @@ export class AddPage implements OnInit {
         // clears fields/data
         this.item_name = '';
         this.category = Category.Miscellaneous;
-        this.quantity = 0;
-        this.price = 0;
+        this.quantity = null;
+        this.price = null;
         this.supplier_name = '';
         this.stock_status = StockStatus.InStock;
         this.featured_item = 0;

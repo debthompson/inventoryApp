@@ -1,3 +1,11 @@
+<!-- 
+  PROG 2005 - Programming Mobile Systems
+  Assessment 3
+  Group: Debralee Thompson, Sakeo Valevou, Lydia Pawlus
+  File: src/app/pages/inventory/inventory.page.html
+  Purpose: Allows the User to add to the list of inventory items and help widget.
+-->
+
 <ion-header translucent="true">  
 	<ion-toolbar>
 
@@ -13,19 +21,21 @@
 </ion-header> 
   
 <ion-content [fullscreen]="true">
-   
+  <form #inventoryForm="ngForm">
+
+
 	<ion-list>
 	 
 		<!-- Name -->
 		<ion-item>
 			<!--<ion-label >Name</ion-label>-->
-			<ion-input id="name" name="name" label="Product" labelPlacement="floating" clearInput placeholder= "Enter product name" [(ngModel)]="item_name"></ion-input>
+			<ion-input id="name" name="name" label="Product" labelPlacement="floating" clearInput placeholder= "Enter product name" [(ngModel)]="item_name" required></ion-input>
 		</ion-item>
 		
 		<!-- Category -->
 		<ion-item>
-			<ion-label position="stacked">Category</ion-label>
-			<ion-select id="category" name ="category" [(ngModel)]="category">
+			<ion-label position="floating">Category</ion-label>
+			<ion-select class="select" id="category" name ="category" [(ngModel)]="category" required>
 				<ion-select-option value="Electronics">Electronics</ion-select-option>
 				<ion-select-option value="Furniture">Furniture</ion-select-option>
 				<ion-select-option value="Clothing">Clothing</ion-select-option>
@@ -34,30 +44,28 @@
 			</ion-select>
 		</ion-item>
    
-		<!-- Qauntity -->
+		<!-- Quantity -->
 		<ion-item>
-			<!--<ion-label position="stacked">Quantity</ion-label>-->
-			<ion-input id="quantity" name="quantity" label="Quantity" labelPlacement="floating" type="number" clearInput placeholder="Enter Quantity" [(ngModel)]="quantity"></ion-input>
-			<ion-note slot="error" color="danger">Text only</ion-note>
+			<ion-input id="quantity" name="quantity" label="Quantity" labelPlacement="floating" type="number" clearInput placeholder="Enter Quantity" [(ngModel)]="quantity" required min="1" #quantityRef="ngModel"></ion-input>
+			<ion-note slot="error" color="danger" *ngIf="quantityRef.invalid && quantityRef.touched">Quanity must be at least 1</ion-note>
 		</ion-item>
    
 		<!-- Price -->
 		<ion-item>
-			<ion-input id="price" name="price" type="number" label="Price" labelPlacement="floating" clearInput placeholder="Enter Price" [(ngModel)]="price"></ion-input>
-			<ion-note slot="error" color="danger">Text only</ion-note>
+			<ion-input id="price" name="price" type="number" label="Price" labelPlacement="floating" clearInput placeholder="Enter Price" [(ngModel)]="price" required min="0" #priceRef="ngModel"></ion-input>
+			<ion-note slot="error" color="danger" *ngIf="priceRef.invalid && priceRef.touched">Please enter a Number</ion-note>
 		</ion-item>
     
 		<!-- Supplier -->
 		<ion-item>
-			<!--<ion-label position="stacked">Supplier Name</ion-label>-->
-			<ion-input id="supplier" name = "supplier" label="Supplier Name" labelPlacement="floating" clearInput placeholder="Enter.." [(ngModel)]="supplier_name"></ion-input>
-			<ion-note slot="error" color="danger">Text only</ion-note>
+			<ion-input id="supplier" name = "supplier" label="Supplier Name" labelPlacement="floating" clearInput placeholder="Enter.." [(ngModel)]="supplier_name" required #supplierRef="ngModel"></ion-input>
+			<ion-note slot="error" color="danger" *ngIf="supplierRef.invalid && supplierRef.touched">Please enter a supplier name</ion-note>
 		</ion-item>
 		
 		<!-- Stock level -->
 		<ion-item>
-			<ion-label position="stacked">Stock level</ion-label>
-			<ion-select [(ngModel)]="stock_status">
+			<ion-label position="floating">Stock level</ion-label>
+			<ion-select class="select" name="stock_status" [(ngModel)]="stock_status" required>
 				<ion-select-option value="In Stock">In stock</ion-select-option>
 				<ion-select-option value="Low Stock">Low stock</ion-select-option>
 				<ion-select-option value="Out of Stock">Out of stock</ion-select-option>
@@ -71,14 +79,17 @@
 		
 		<!-- Note -->
 		<ion-item>
-			<!--<ion-label position="stacked">Note</ion-label>-->
-			<ion-input id="note" name="note" label="Note" labelPlacement="floating" clearInput placeholder="Enter.." [(ngModel)]="special_note"></ion-input>
-			<ion-note slot="error" color="danger">Text only</ion-note>
+			<ion-textarea id="note" name="special_note" label="Note" labelPlacement="floating" rows="5" placeholder="Enter.." [(ngModel)]="special_note"></ion-textarea>
 		</ion-item>
    
+		
     </ion-list>
 	
 	<!-- Add to Inventory Button -->
-	<ion-button (click)="addItem()">Add Item</ion-button>
-  
+	<!--<ion-button (click)="addItem()">Add Item</ion-button>-->
+	<ion-button expand="block" [disabled]="inventoryForm.invalid" (click)="addItem()">
+      Add Item
+    </ion-button>
+   </form>
+
 </ion-content>
